@@ -14,7 +14,7 @@ namespace TermProjectBookkeeping.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View(userroledao.GetAllUserRoles());
+            return View(userroledao.GetAllRecords());
         }
 
         // GET: Home/Details/5

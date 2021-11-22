@@ -13,5 +13,7 @@ namespace TermProjectBookkeeping.Models
         public int scholarshiptype { get; set; }
         public bool ifsocial { get; set; }
         public bool ifsocialhelp { get; set; }
+
+        public List<StudentScholarship> StudentScholarships { get; set; }
     }
 }

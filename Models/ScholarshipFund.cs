@@ -15,5 +15,7 @@ namespace TermProjectBookkeeping.Models
         public int scholarshipperfect { get; set; }
         public int basescholarship { get; set; }
         public int totalsum { get; set; }
+
+        public List<ScholarshipFund> ScolarshipFunds { get; set; }
     }
 }

@@ -15,5 +15,7 @@ namespace TermProjectBookkeeping.Models
         public int price1pc { get; set; }
         public Nullable<int> overallsum { get; set; }
         public Nullable<bool> ifapproved { get; set; }
+
+        public List<PurchaseList> PurchaseLists { get; set; }
     }
 }

@@ -13,5 +13,7 @@ namespace TermProjectBookkeeping.Models
         public int sickdays { get; set; }
         public int totalsum { get; set; }
         public System.DateTime formationdate { get; set; }
+
+        public List<SalaryFund> SalaryFunds { get; set; }
     }
 }

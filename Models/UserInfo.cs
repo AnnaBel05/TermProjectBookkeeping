@@ -14,6 +14,6 @@ namespace TermProjectBookkeeping.Models
         public int userroleid { get; set; }
         public virtual userrole userrole { get; set; }
 
-        public List<UserInfo> UserInfoList { get; set; }
+        public List<UserInfo> UserInfos { get; set; }
     }
 }

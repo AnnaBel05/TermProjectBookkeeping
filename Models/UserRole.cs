@@ -9,6 +9,6 @@ namespace TermProjectBookkeeping.Models
     {
         public int ID { get; set; }
         public string rolename { get; set; }
-        public List<UserRole> UserRoleList { get; set; }
+        public List<UserRole> UserRoles { get; set; }
     }
 }

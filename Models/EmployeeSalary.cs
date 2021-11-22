@@ -13,5 +13,7 @@ namespace TermProjectBookkeeping.Models
         public Nullable<int> overwork { get; set; }
         public Nullable<int> sickdays { get; set; }
         public Nullable<int> bonus { get; set; }
+
+        public List<EmployeeSalary> EmployeeSalarys { get; set; }
     }
 }
