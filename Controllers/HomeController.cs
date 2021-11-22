@@ -10,17 +10,25 @@ namespace TermProjectBookkeeping.Controllers
 {
     public class HomeController : Controller
     {
-        UserRoleDAO userroledao = new UserRoleDAO();
+
+        EmployeeSalaryDAO employeeSalaryDAO = new EmployeeSalaryDAO();
+        PurchaseListDAO purchaseListDAO = new PurchaseListDAO();
+        SalaryFundDAO salaryFundDAO = new SalaryFundDAO();
+        ScholarshipFundDAO scholarshipFundDAO = new ScholarshipFundDAO();
+        StudentScholarshipDAO studentScholarshipDAO = new StudentScholarshipDAO();
+        UserInfoDAO userInfoDAO = new UserInfoDAO();
+        UserRoleDAO userRoleDAO = new UserRoleDAO();
+        
         // GET: Home
         public ActionResult Index()
         {
-            return View(userroledao.GetAllRecords());
+            return View(purchaseListDAO.GetAllRecords());
         }
 
         // GET: Home/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(purchaseListDAO.GetRecord(id));
         }
 
         // GET: Home/Create
@@ -31,13 +39,20 @@ namespace TermProjectBookkeeping.Controllers
 
         // POST: Home/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create([Bind(Exclude = "ID")] PurchaseList purchaseList)
         {
             try
             {
                 // TODO: Add insert logic here
 
-                return RedirectToAction("Index");
+                if (purchaseListDAO.AddRecord(purchaseList))
+                { return RedirectToAction("Index"); }
+                else
+                {
+                    return View("Create");
+                }
+
+
             }
             catch
             {
@@ -53,13 +68,19 @@ namespace TermProjectBookkeeping.Controllers
 
         // POST: Home/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, PurchaseList purchaseList)
         {
             try
             {
                 // TODO: Add update logic here
 
+                if (purchaseListDAO.UpdateRecord(id, purchaseList))
+                {
+                    return RedirectToAction("Index");
+                }
+
                 return RedirectToAction("Index");
+
             }
             catch
             {
@@ -75,13 +96,19 @@ namespace TermProjectBookkeeping.Controllers
 
         // POST: Home/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, PurchaseList purchaseList)
         {
             try
             {
                 // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                if (purchaseListDAO.DeleteRecord(id, purchaseList))
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View("Create");
+                }
             }
             catch
             {
