@@ -1,0 +1,68 @@
+﻿@model TermProjectBookkeeping.purchaselist
+
+<div>
+    <h4>purchaselist</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.purchasename)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.purchasename)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.purchasedescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.purchasedescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.price1pc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price1pc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.overallsum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.overallsum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ifapproved)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ifapproved)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

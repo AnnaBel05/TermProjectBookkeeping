@@ -1,7 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using TermProjectBookkeeping.Models;
+//using TermProjectBookkeeping.Models;
+using TermProjectBookkeeping;
+using MyLib;
+
+using System.Configuration;
+
+using log4net;
+using log4net.Config;
 
 namespace TermProjectBookkeeping.DAO
 {
@@ -14,33 +21,44 @@ namespace TermProjectBookkeeping.DAO
     */
     public class PurchaseListDAO : DAO
     {
-        public List<PurchaseList> GetAllRecords()
+        private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        public List<purchaselist> GetAllRecords()
         {
+            log4net.Config.XmlConfigurator.Configure();
+            log.Info("Start connection to DB in GetAllRecords method");
             Connect();
-            List<PurchaseList> purchaseLists = new List<PurchaseList>();
+            
+            List<purchaselist> purchaseLists = new List<purchaselist>();
             try
             {
+                log.Info("Get all records from table purchaselist");
                 SqlCommand command = new SqlCommand("SELECT * FROM purchaselist", Con);
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    PurchaseList purchaselist = new PurchaseList();
-                    purchaselist.id = Convert.ToInt32(reader["id"]);
-                    purchaselist.purchasename = Convert.ToString(reader["purchasename"]);
-                    purchaselist.purchasedescription = Convert.ToString(reader["purchasedescription"]);
-                    purchaselist.sender = Convert.ToInt32(reader["sender"]);
-                    purchaselist.quantity = Convert.ToInt32(reader["quantity"]);
-                    purchaselist.price1pc = Convert.ToInt32(reader["price1pc"]);
-                    purchaselist.overallsum = Convert.ToInt32(reader["overallsum"]);
-                    purchaselist.ifapproved = Convert.ToBoolean(reader["ifapproved"]);
-                    purchaseLists.Add(purchaselist);
+                    purchaselist purchaselistObj = new purchaselist();
+                    purchaselistObj.id = Convert.ToInt32(reader["id"]);
+                    purchaselistObj.purchasename = Convert.ToString(reader["purchasename"]);
+                    purchaselistObj.purchasedescription = Convert.ToString(reader["purchasedescription"]);
+                    purchaselistObj.sender = Convert.ToInt32(reader["sender"]);
+                    purchaselistObj.quantity = Convert.ToInt32(reader["quantity"]);
+                    purchaselistObj.price1pc = Convert.ToInt32(reader["price1pc"]);
+                    //purchaselistObj.overallsum = Convert.ToInt32(reader["overallsum"]);
+                    purchaselistObj.ifapproved = Convert.ToBoolean(reader["ifapproved"]);
+
+                    TotalSum record = new TotalSum(purchaselistObj.purchasename, purchaselistObj.purchasedescription,
+                    purchaselistObj.quantity, purchaselistObj.price1pc);
+
+                    purchaselistObj.overallsum = record.ReturnTotalPrice(record);
+
+                    purchaseLists.Add(purchaselistObj);
                 }
                 reader.Close();
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                log.Error("Error happened",ex);
             }
             finally
             {
@@ -49,10 +67,10 @@ namespace TermProjectBookkeeping.DAO
             return purchaseLists;
         }
 
-        public PurchaseList GetRecord(int id)
+        public purchaselist GetRecord(int id)
         {
             Connect();
-            PurchaseList purchaselist = new PurchaseList();
+            purchaselist purchaselistObj = new purchaselist();
             try
             {
                 SqlCommand cmd = new SqlCommand("SELECT * FROM purchaselist where id = @ID", Con);
@@ -61,16 +79,22 @@ namespace TermProjectBookkeeping.DAO
 
                 reader.Read();
 
-                purchaselist.id = Convert.ToInt32(reader["id"]);
-                purchaselist.purchasename = Convert.ToString(reader["purchasename"]);
-                purchaselist.purchasedescription = Convert.ToString(reader["purchasedescription"]);
-                purchaselist.sender = Convert.ToInt32(reader["sender"]);
-                purchaselist.quantity = Convert.ToInt32(reader["quantity"]);
-                purchaselist.price1pc = Convert.ToInt32(reader["price1pc"]);
-                purchaselist.overallsum = Convert.ToInt32(reader["overallsum"]);
-                purchaselist.ifapproved = Convert.ToBoolean(reader["ifapproved"]);
+                purchaselistObj.id = Convert.ToInt32(reader["id"]);
+                purchaselistObj.purchasename = Convert.ToString(reader["purchasename"]);
+                purchaselistObj.purchasedescription = Convert.ToString(reader["purchasedescription"]);
+                purchaselistObj.sender = Convert.ToInt32(reader["sender"]);
+                purchaselistObj.quantity = Convert.ToInt32(reader["quantity"]);
+                purchaselistObj.price1pc = Convert.ToInt32(reader["price1pc"]);
+                //purchaselistClass.overallsum = Convert.ToInt32(reader["overallsum"]);
+                purchaselistObj.ifapproved = Convert.ToBoolean(reader["ifapproved"]);
+
+                TotalSum record = new TotalSum(purchaselistObj.purchasename, purchaselistObj.purchasedescription,
+                    purchaselistObj.quantity, purchaselistObj.price1pc);
+
+                purchaselistObj.overallsum = record.ReturnTotalPrice(record);
 
                 reader.Close();
+
 
             }
             catch (Exception)
@@ -81,10 +105,10 @@ namespace TermProjectBookkeeping.DAO
             {
                 Disconnect();
             }
-            return purchaselist;
+            return purchaselistObj;
         }
 
-        public bool UpdateRecord(int id, PurchaseList purchaselist)
+        public bool UpdateRecord(int id, purchaselist purchaselistObj)
         {
             Connect();
             bool result = true;
@@ -100,13 +124,13 @@ namespace TermProjectBookkeeping.DAO
                     " ifapproved = @Ifapproved " +
                     " WHERE id = @ID ", Con);
 
-                cmd.Parameters.Add(new SqlParameter("@Purchasename", purchaselist.purchasename));
-                cmd.Parameters.Add(new SqlParameter("@Purchasedescription", purchaselist.purchasedescription));
-                cmd.Parameters.Add(new SqlParameter("@Sender", purchaselist.sender));
-                cmd.Parameters.Add(new SqlParameter("@Quantity", purchaselist.quantity));
-                cmd.Parameters.Add(new SqlParameter("@Price1pc", purchaselist.price1pc));
-                cmd.Parameters.Add(new SqlParameter("@Overallsum", purchaselist.overallsum));
-                cmd.Parameters.Add(new SqlParameter("@Ifapproved", purchaselist.ifapproved));
+                cmd.Parameters.Add(new SqlParameter("@Purchasename", purchaselistObj.purchasename));
+                cmd.Parameters.Add(new SqlParameter("@Purchasedescription", purchaselistObj.purchasedescription));
+                cmd.Parameters.Add(new SqlParameter("@Sender", purchaselistObj.sender));
+                cmd.Parameters.Add(new SqlParameter("@Quantity", purchaselistObj.quantity));
+                cmd.Parameters.Add(new SqlParameter("@Price1pc", purchaselistObj.price1pc));
+                cmd.Parameters.Add(new SqlParameter("@Overallsum", purchaselistObj.overallsum));
+                cmd.Parameters.Add(new SqlParameter("@Ifapproved", purchaselistObj.ifapproved));
                 cmd.Parameters.Add(new SqlParameter("@ID", id));
                 cmd.ExecuteNonQuery();
             }
@@ -121,7 +145,7 @@ namespace TermProjectBookkeeping.DAO
             return result;
         }
 
-        public bool AddRecord(PurchaseList purchaselist)
+        public bool AddRecord(purchaselist purchaselistObj)
         {
             Connect();
             bool result = true;
@@ -132,13 +156,13 @@ namespace TermProjectBookkeeping.DAO
                     "quantity, price1pc, overallsum, ifapproved) " +
                     "VALUES (@Purchasename, @Purchasedescription, @Sender, " +
                     "@Quantity, @Price1pc, @Overallsum, @Ifapproved)", Con);
-                cmd.Parameters.Add(new SqlParameter("@Purchasename", purchaselist.purchasename));
-                cmd.Parameters.Add(new SqlParameter("@Purchasedescription", purchaselist.purchasedescription));
-                cmd.Parameters.Add(new SqlParameter("@Sender", purchaselist.sender));
-                cmd.Parameters.Add(new SqlParameter("@Quantity", purchaselist.quantity));
-                cmd.Parameters.Add(new SqlParameter("@Price1pc", purchaselist.price1pc));
-                cmd.Parameters.Add(new SqlParameter("@Overallsum", purchaselist.overallsum));
-                cmd.Parameters.Add(new SqlParameter("@Ifapproved", purchaselist.ifapproved));
+                cmd.Parameters.Add(new SqlParameter("@Purchasename", purchaselistObj.purchasename));
+                cmd.Parameters.Add(new SqlParameter("@Purchasedescription", purchaselistObj.purchasedescription));
+                cmd.Parameters.Add(new SqlParameter("@Sender", purchaselistObj.sender));
+                cmd.Parameters.Add(new SqlParameter("@Quantity", purchaselistObj.quantity));
+                cmd.Parameters.Add(new SqlParameter("@Price1pc", purchaselistObj.price1pc));
+                cmd.Parameters.Add(new SqlParameter("@Overallsum", purchaselistObj.overallsum));
+                cmd.Parameters.Add(new SqlParameter("@Ifapproved", purchaselistObj.ifapproved));
                 cmd.ExecuteNonQuery();
             }
             catch (Exception)
@@ -152,7 +176,7 @@ namespace TermProjectBookkeeping.DAO
             return result;
         }
 
-        public bool DeleteRecord(int id, PurchaseList purchaselist)
+        public bool DeleteRecord(int id, purchaselist purchaselistObj)
         {
             Connect();
             bool result = true;
@@ -172,5 +196,7 @@ namespace TermProjectBookkeeping.DAO
             }
             return result;
         }
+
+
     }
 }

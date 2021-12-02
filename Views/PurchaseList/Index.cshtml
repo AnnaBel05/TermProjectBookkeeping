@@ -1,0 +1,63 @@
+﻿@model IEnumerable<TermProjectBookkeeping.purchaselist>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.purchasename)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.purchasedescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.price1pc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.overallsum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ifapproved)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.purchasename)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.purchasedescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.price1pc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.overallsum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ifapproved)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

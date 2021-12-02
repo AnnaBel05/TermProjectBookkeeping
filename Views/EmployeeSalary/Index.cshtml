@@ -1,0 +1,57 @@
+﻿@model IEnumerable<TermProjectBookkeeping.employeesalary>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.employee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.hourlyrate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.overwork)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sickdays)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.bonus)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.employee)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.hourlyrate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.overwork)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sickdays)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.bonus)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

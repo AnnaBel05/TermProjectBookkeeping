@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using TermProjectBookkeeping.Models;
+//using TermProjectBookkeeping.Models;
+using TermProjectBookkeeping;
 
 namespace TermProjectBookkeeping.DAO
 {
@@ -14,24 +15,24 @@ namespace TermProjectBookkeeping.DAO
     */
     public class SalaryFundDAO : DAO
     {
-        public List<SalaryFund> GetAllRecords()
+        public List<salaryfund> GetAllRecords()
         {
             Connect();
-            List<SalaryFund> salaryFunds = new List<SalaryFund>();
+            List<salaryfund> salaryFunds = new List<salaryfund>();
             try
             {
                 SqlCommand command = new SqlCommand("SELECT * FROM salaryfund", Con);
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    SalaryFund salaryfund = new SalaryFund();
-                    salaryfund.id = Convert.ToInt32(reader["id"]);
-                    salaryfund.worktime = Convert.ToInt32(reader["worktime"]);
-                    salaryfund.overwork = Convert.ToInt32(reader["overwork"]);
-                    salaryfund.sickdays = Convert.ToInt32(reader["sickdays"]);
-                    salaryfund.totalsum = Convert.ToInt32(reader["totalsum"]);
-                    salaryfund.formationdate = Convert.ToDateTime(reader["formationdate"]);
-                    salaryFunds.Add(salaryfund);
+                    salaryfund salaryfundObj = new salaryfund();
+                    salaryfundObj.id = Convert.ToInt32(reader["id"]);
+                    salaryfundObj.worktime = Convert.ToInt32(reader["worktime"]);
+                    salaryfundObj.overwork = Convert.ToInt32(reader["overwork"]);
+                    salaryfundObj.sickdays = Convert.ToInt32(reader["sickdays"]);
+                    salaryfundObj.totalsum = Convert.ToInt32(reader["totalsum"]);
+                    salaryfundObj.formationdate = Convert.ToDateTime(reader["formationdate"]);
+                    salaryFunds.Add(salaryfundObj);
                 }
                 reader.Close();
 
@@ -47,10 +48,10 @@ namespace TermProjectBookkeeping.DAO
             return salaryFunds;
         }
 
-        public SalaryFund GetRecord(int id)
+        public salaryfund GetRecord(int id)
         {
             Connect();
-            SalaryFund salaryfund = new SalaryFund();
+            salaryfund salaryfundObj = new salaryfund();
             try
             {
                 SqlCommand cmd = new SqlCommand("SELECT * FROM salaryfund where id = @ID", Con);
@@ -59,12 +60,12 @@ namespace TermProjectBookkeeping.DAO
 
                 reader.Read();
 
-                salaryfund.id = Convert.ToInt32(reader["id"]);
-                salaryfund.worktime = Convert.ToInt32(reader["worktime"]);
-                salaryfund.overwork = Convert.ToInt32(reader["overwork"]);
-                salaryfund.sickdays = Convert.ToInt32(reader["sickdays"]);
-                salaryfund.totalsum = Convert.ToInt32(reader["totalsum"]);
-                salaryfund.formationdate = Convert.ToDateTime(reader["formationdate"]);
+                salaryfundObj.id = Convert.ToInt32(reader["id"]);
+                salaryfundObj.worktime = Convert.ToInt32(reader["worktime"]);
+                salaryfundObj.overwork = Convert.ToInt32(reader["overwork"]);
+                salaryfundObj.sickdays = Convert.ToInt32(reader["sickdays"]);
+                salaryfundObj.totalsum = Convert.ToInt32(reader["totalsum"]);
+                salaryfundObj.formationdate = Convert.ToDateTime(reader["formationdate"]);
 
                 reader.Close();
 
@@ -77,10 +78,10 @@ namespace TermProjectBookkeeping.DAO
             {
                 Disconnect();
             }
-            return salaryfund;
+            return salaryfundObj;
         }
 
-        public bool UpdateRecord(int id, SalaryFund salaryfund)
+        public bool UpdateRecord(int id, salaryfund salaryfundObj)
         {
             Connect();
             bool result = true;
@@ -94,11 +95,11 @@ namespace TermProjectBookkeeping.DAO
                     " formationdate = @FormationDate " +
                     " WHERE id = @ID ", Con);
 
-                cmd.Parameters.Add(new SqlParameter(" @Worktime", salaryfund.worktime));
-                cmd.Parameters.Add(new SqlParameter("@Overwork", salaryfund.overwork));
-                cmd.Parameters.Add(new SqlParameter("@Sickdays", salaryfund.sickdays));
-                cmd.Parameters.Add(new SqlParameter("@TotalSum", salaryfund.totalsum));
-                cmd.Parameters.Add(new SqlParameter("@FormationDate", salaryfund.formationdate));
+                cmd.Parameters.Add(new SqlParameter(" @Worktime", salaryfundObj.worktime));
+                cmd.Parameters.Add(new SqlParameter("@Overwork", salaryfundObj.overwork));
+                cmd.Parameters.Add(new SqlParameter("@Sickdays", salaryfundObj.sickdays));
+                cmd.Parameters.Add(new SqlParameter("@TotalSum", salaryfundObj.totalsum));
+                cmd.Parameters.Add(new SqlParameter("@FormationDate", salaryfundObj.formationdate));
                 cmd.Parameters.Add(new SqlParameter("@ID", id));
                 cmd.ExecuteNonQuery();
             }
@@ -113,7 +114,7 @@ namespace TermProjectBookkeeping.DAO
             return result;
         }
 
-        public bool AddRecord(SalaryFund salaryfund)
+        public bool AddRecord(salaryfund salaryfundObj)
         {
             Connect();
             bool result = true;
@@ -122,11 +123,11 @@ namespace TermProjectBookkeeping.DAO
                 SqlCommand cmd = new SqlCommand("INSERT INTO " +
                     "salaryfund(worktime, overwork, sickdays, totalsum, formationdate) " +
                     "VALUES (@Worktime, @Overwork, @Sickdays, @TotalSum, @FormationDate)", Con);
-                cmd.Parameters.Add(new SqlParameter(" @Worktime", salaryfund.worktime));
-                cmd.Parameters.Add(new SqlParameter("@Overwork", salaryfund.overwork));
-                cmd.Parameters.Add(new SqlParameter("@Sickdays", salaryfund.sickdays));
-                cmd.Parameters.Add(new SqlParameter("@TotalSum", salaryfund.totalsum));
-                cmd.Parameters.Add(new SqlParameter("@FormationDate", salaryfund.formationdate));
+                cmd.Parameters.Add(new SqlParameter(" @Worktime", salaryfundObj.worktime));
+                cmd.Parameters.Add(new SqlParameter("@Overwork", salaryfundObj.overwork));
+                cmd.Parameters.Add(new SqlParameter("@Sickdays", salaryfundObj.sickdays));
+                cmd.Parameters.Add(new SqlParameter("@TotalSum", salaryfundObj.totalsum));
+                cmd.Parameters.Add(new SqlParameter("@FormationDate", salaryfundObj.formationdate));
                 cmd.ExecuteNonQuery();
             }
             catch (Exception)
@@ -140,7 +141,7 @@ namespace TermProjectBookkeeping.DAO
             return result;
         }
 
-        public bool DeleteRecord(int id, StudentScholarship studentscholarship)
+        public bool DeleteRecord(int id, salaryfund salaryfundObj)
         {
             Connect();
             bool result = true;

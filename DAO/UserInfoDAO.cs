@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using TermProjectBookkeeping.Models;
+//using TermProjectBookkeeping.Models;
+using TermProjectBookkeeping;
 
 namespace TermProjectBookkeeping.DAO
 {
@@ -14,23 +15,23 @@ namespace TermProjectBookkeeping.DAO
     */
     public class UserInfoDAO : DAO
     {
-        public List<UserInfo> GetAllRecords()
+        public List<userinfo> GetAllRecords()
         {
             Connect();
-            List<UserInfo> infoList = new List<UserInfo>();
+            List<userinfo> infoList = new List<userinfo>();
             try
             {
                 SqlCommand command = new SqlCommand("SELECT * FROM userinfo", Con);
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    UserInfo userinfo = new UserInfo();
-                    userinfo.id = Convert.ToInt32(reader["id"]);
-                    userinfo.lastname = Convert.ToString(reader["lastname"]);
-                    userinfo.username = Convert.ToString(reader["username"]);
-                    userinfo.patronymic = Convert.ToString(reader["patronymic"]);
-                    userinfo.userroleid = Convert.ToInt32(reader["userroleid"]);
-                    infoList.Add(userinfo);
+                    userinfo userinfoObj = new userinfo();
+                    userinfoObj.id = Convert.ToInt32(reader["id"]);
+                    userinfoObj.lastname = Convert.ToString(reader["lastname"]);
+                    userinfoObj.username = Convert.ToString(reader["username"]);
+                    userinfoObj.patronymic = Convert.ToString(reader["patronymic"]);
+                    userinfoObj.userroleid = Convert.ToInt32(reader["userroleid"]);
+                    infoList.Add(userinfoObj);
 
                 }
                 reader.Close();
@@ -47,10 +48,10 @@ namespace TermProjectBookkeeping.DAO
             return infoList;
         }
 
-        public UserInfo GetRecord(int id)
+        public userinfo GetRecord(int id)
         {
             Connect();
-            UserInfo userinfo = new UserInfo();
+            userinfo userinfoObj = new userinfo();
             try
             {
                 SqlCommand cmd = new SqlCommand("SELECT * FROM userinfo where id = @ID", Con);
@@ -59,11 +60,11 @@ namespace TermProjectBookkeeping.DAO
 
                 reader.Read();
 
-                userinfo.id = Convert.ToInt32(reader["id"]);
-                userinfo.lastname = Convert.ToString(reader["lastname"]);
-                userinfo.username = Convert.ToString(reader["username"]);
-                userinfo.patronymic = Convert.ToString(reader["patronymic"]);
-                userinfo.userroleid = Convert.ToInt32(reader["userroleid"]);
+                userinfoObj.id = Convert.ToInt32(reader["id"]);
+                userinfoObj.lastname = Convert.ToString(reader["lastname"]);
+                userinfoObj.username = Convert.ToString(reader["username"]);
+                userinfoObj.patronymic = Convert.ToString(reader["patronymic"]);
+                userinfoObj.userroleid = Convert.ToInt32(reader["userroleid"]);
 
                 reader.Close();
 
@@ -76,10 +77,10 @@ namespace TermProjectBookkeeping.DAO
             {
                 Disconnect();
             }
-            return userinfo;
+            return userinfoObj;
         }
 
-        public bool UpdateRecord(int id, UserInfo userinfo)
+        public bool UpdateRecord(int id, userinfo userinfoObj)
         {
             Connect();
             bool result = true;
@@ -92,10 +93,10 @@ namespace TermProjectBookkeeping.DAO
                     " userroleid = @UserRoleID " +
                     " WHERE id = @ID ", Con);
 
-                cmd.Parameters.Add(new SqlParameter("@LastName", userinfo.lastname));
-                cmd.Parameters.Add(new SqlParameter("@UserName", userinfo.username));
-                cmd.Parameters.Add(new SqlParameter("@Patronymic", userinfo.patronymic));
-                cmd.Parameters.Add(new SqlParameter("@UserRoleID", userinfo.userroleid));
+                cmd.Parameters.Add(new SqlParameter("@LastName", userinfoObj.lastname));
+                cmd.Parameters.Add(new SqlParameter("@UserName", userinfoObj.username));
+                cmd.Parameters.Add(new SqlParameter("@Patronymic", userinfoObj.patronymic));
+                cmd.Parameters.Add(new SqlParameter("@UserRoleID", userinfoObj.userroleid));
                 cmd.Parameters.Add(new SqlParameter("@ID", id));
                 cmd.ExecuteNonQuery();
             }
@@ -110,7 +111,7 @@ namespace TermProjectBookkeeping.DAO
             return result;
         }
 
-        public bool AddRecord(UserInfo userinfo)
+        public bool AddRecord(userinfo userinfoObj)
         {
             Connect();
             bool result = true;
@@ -119,10 +120,10 @@ namespace TermProjectBookkeeping.DAO
                 SqlCommand cmd = new SqlCommand("INSERT INTO " +
                     "userinfo(lastname, username, patronymic, userroleid) " +
                     "VALUES (@LastName, @UserName, @Patronymic, @UserRoleID )", Con);
-                cmd.Parameters.Add(new SqlParameter("@LastName", userinfo.lastname));
-                cmd.Parameters.Add(new SqlParameter("@UserName", userinfo.username));
-                cmd.Parameters.Add(new SqlParameter("@Patronymic", userinfo.patronymic));
-                cmd.Parameters.Add(new SqlParameter("@UserRoleID", userinfo.userroleid));
+                cmd.Parameters.Add(new SqlParameter("@LastName", userinfoObj.lastname));
+                cmd.Parameters.Add(new SqlParameter("@UserName", userinfoObj.username));
+                cmd.Parameters.Add(new SqlParameter("@Patronymic", userinfoObj.patronymic));
+                cmd.Parameters.Add(new SqlParameter("@UserRoleID", userinfoObj.userroleid));
                 cmd.ExecuteNonQuery();
             }
             catch (Exception)
@@ -136,7 +137,7 @@ namespace TermProjectBookkeeping.DAO
             return result;
         }
 
-        public bool DeleteRecord(int id, UserInfo userinfo)
+        public bool DeleteRecord(int id, userinfo userinfoObj)
         {
             Connect();
             bool result = true;

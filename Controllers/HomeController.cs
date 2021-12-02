@@ -3,117 +3,47 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using TermProjectBookkeeping.Models;
+//using TermProjectBookkeeping.Models;
+using TermProjectBookkeeping;
 using TermProjectBookkeeping.DAO;
+using TermProjectBookkeeping.ViewModel;
 
 namespace TermProjectBookkeeping.Controllers
 {
     public class HomeController : Controller
     {
+        bookkeepingEntities2 bookkeepingEntities = new bookkeepingEntities2();
 
-        EmployeeSalaryDAO employeeSalaryDAO = new EmployeeSalaryDAO();
-        PurchaseListDAO purchaseListDAO = new PurchaseListDAO();
-        SalaryFundDAO salaryFundDAO = new SalaryFundDAO();
-        ScholarshipFundDAO scholarshipFundDAO = new ScholarshipFundDAO();
-        StudentScholarshipDAO studentScholarshipDAO = new StudentScholarshipDAO();
-        UserInfoDAO userInfoDAO = new UserInfoDAO();
-        UserRoleDAO userRoleDAO = new UserRoleDAO();
-        
-        // GET: Home
         public ActionResult Index()
         {
-            return View(purchaseListDAO.GetAllRecords());
-        }
-
-        // GET: Home/Details/5
-        public ActionResult Details(int id)
-        {
-            return View(purchaseListDAO.GetRecord(id));
-        }
-
-        // GET: Home/Create
-        public ActionResult Create()
-        {
             return View();
         }
 
-        // POST: Home/Create
-        [HttpPost]
-        public ActionResult Create([Bind(Exclude = "ID")] PurchaseList purchaseList)
+        public ActionResult About()
         {
-            try
-            {
-                // TODO: Add insert logic here
+            ViewBag.Message = "Your application description page.";
 
-                if (purchaseListDAO.AddRecord(purchaseList))
-                { return RedirectToAction("Index"); }
-                else
-                {
-                    return View("Create");
-                }
-
-
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Home/Edit/5
-        public ActionResult Edit(int id)
-        {
             return View();
         }
 
-        // POST: Home/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, PurchaseList purchaseList)
+        public ActionResult Contact()
         {
-            try
-            {
-                // TODO: Add update logic here
+            ViewBag.Message = "Your contact page.";
 
-                if (purchaseListDAO.UpdateRecord(id, purchaseList))
-                {
-                    return RedirectToAction("Index");
-                }
-
-                return RedirectToAction("Index");
-
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Home/Delete/5
-        public ActionResult Delete(int id)
-        {
             return View();
         }
 
-        // POST: Home/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, PurchaseList purchaseList)
+        public ActionResult Error()
         {
-            try
-            {
-                // TODO: Add delete logic here
-                if (purchaseListDAO.DeleteRecord(id, purchaseList))
-                {
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    return View("Create");
-                }
-            }
-            catch
-            {
-                return View();
-            }
+
+            return View();
         }
+
+        public ActionResult PurchaseList()
+        {
+
+            return View("/PurchaseList/Index");
+        }
+
     }
 }

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using TermProjectBookkeeping.Models;
+//using TermProjectBookkeeping.Models;
+using TermProjectBookkeeping;
 
 namespace TermProjectBookkeeping.DAO
 {
@@ -14,26 +15,26 @@ namespace TermProjectBookkeeping.DAO
     */
     public class ScholarshipFundDAO : DAO
     {
-        public List<ScholarshipFund> GetAllRecords()
+        public List<scholarshipfund> GetAllRecords()
         {
             Connect();
-            List<ScholarshipFund> scholarshipFunds = new List<ScholarshipFund>();
+            List<scholarshipfund> scholarshipFunds = new List<scholarshipfund>();
             try
             {
                 SqlCommand command = new SqlCommand("SELECT * FROM scholarshipfund", Con);
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    ScholarshipFund scholarshipfund = new ScholarshipFund();
-                    scholarshipfund.id = Convert.ToInt32(reader["id"]);
-                    scholarshipfund.formationdate = Convert.ToDateTime(reader["formationdate"]);
-                    scholarshipfund.scholarshipsocial = Convert.ToInt32(reader["scholarshipsocial"]);
-                    scholarshipfund.scholarshipgreat = Convert.ToInt32(reader["scholarshipgreat"]);
-                    scholarshipfund.scholarshipgreatperfect = Convert.ToInt32(reader["scholarshipgreatperfect"]);
-                    scholarshipfund.scholarshipperfect = Convert.ToInt32(reader["scholarshipperfect"]);
-                    scholarshipfund.basescholarship = Convert.ToInt32(reader["basescholarship"]);
-                    scholarshipfund.totalsum = Convert.ToInt32(reader["totalsum"]);
-                    scholarshipFunds.Add(scholarshipfund);
+                    scholarshipfund scholarshipfundObj = new scholarshipfund();
+                    scholarshipfundObj.id = Convert.ToInt32(reader["id"]);
+                    scholarshipfundObj.formationdate = Convert.ToDateTime(reader["formationdate"]);
+                    scholarshipfundObj.scholarshipsocial = Convert.ToInt32(reader["scholarshipsocial"]);
+                    scholarshipfundObj.scholarshipgreat = Convert.ToInt32(reader["scholarshipgreat"]);
+                    scholarshipfundObj.scholarshipgreatperfect = Convert.ToInt32(reader["scholarshipgreatperfect"]);
+                    scholarshipfundObj.scholarshipperfect = Convert.ToInt32(reader["scholarshipperfect"]);
+                    scholarshipfundObj.basescholarship = Convert.ToInt32(reader["basescholarship"]);
+                    scholarshipfundObj.totalsum = Convert.ToInt32(reader["totalsum"]);
+                    scholarshipFunds.Add(scholarshipfundObj);
                 }
                 reader.Close();
 
@@ -49,10 +50,10 @@ namespace TermProjectBookkeeping.DAO
             return scholarshipFunds;
         }
 
-        public ScholarshipFund GetRecord(int id)
+        public scholarshipfund GetRecord(int id)
         {
             Connect();
-            ScholarshipFund scholarshipfund = new ScholarshipFund();
+            scholarshipfund scholarshipfundObj = new scholarshipfund();
             try
             {
                 SqlCommand cmd = new SqlCommand("SELECT * FROM scholarshipfund where id = @ID", Con);
@@ -61,14 +62,14 @@ namespace TermProjectBookkeeping.DAO
 
                 reader.Read();
 
-                scholarshipfund.id = Convert.ToInt32(reader["id"]);
-                scholarshipfund.formationdate = Convert.ToDateTime(reader["formationdate"]);
-                scholarshipfund.scholarshipsocial = Convert.ToInt32(reader["scholarshipsocial"]);
-                scholarshipfund.scholarshipgreat = Convert.ToInt32(reader["scholarshipgreat"]);
-                scholarshipfund.scholarshipgreatperfect = Convert.ToInt32(reader["scholarshipgreatperfect"]);
-                scholarshipfund.scholarshipperfect = Convert.ToInt32(reader["scholarshipperfect"]);
-                scholarshipfund.basescholarship = Convert.ToInt32(reader["basescholarship"]);
-                scholarshipfund.totalsum = Convert.ToInt32(reader["totalsum"]);
+                scholarshipfundObj.id = Convert.ToInt32(reader["id"]);
+                scholarshipfundObj.formationdate = Convert.ToDateTime(reader["formationdate"]);
+                scholarshipfundObj.scholarshipsocial = Convert.ToInt32(reader["scholarshipsocial"]);
+                scholarshipfundObj.scholarshipgreat = Convert.ToInt32(reader["scholarshipgreat"]);
+                scholarshipfundObj.scholarshipgreatperfect = Convert.ToInt32(reader["scholarshipgreatperfect"]);
+                scholarshipfundObj.scholarshipperfect = Convert.ToInt32(reader["scholarshipperfect"]);
+                scholarshipfundObj.basescholarship = Convert.ToInt32(reader["basescholarship"]);
+                scholarshipfundObj.totalsum = Convert.ToInt32(reader["totalsum"]);
 
                 reader.Close();
 
@@ -81,10 +82,11 @@ namespace TermProjectBookkeeping.DAO
             {
                 Disconnect();
             }
-            return scholarshipfund;
+            return scholarshipfundObj;
         }
 
-        public bool UpdateRecord(int id, ScholarshipFund scholarshipfund)
+        public bool UpdateRecord(int id, scholarshipfund scholarshipfundObj
+            )
         {
             Connect();
             bool result = true;
@@ -100,13 +102,13 @@ namespace TermProjectBookkeeping.DAO
                     " totalsum = @TotalSum " +
                     " WHERE id = @ID ", Con);
 
-                cmd.Parameters.Add(new SqlParameter("@FormationDate", scholarshipfund.formationdate));
-                cmd.Parameters.Add(new SqlParameter("@ScholarshipSocial", scholarshipfund.scholarshipsocial));
-                cmd.Parameters.Add(new SqlParameter("@ScholarshipGreat", scholarshipfund.scholarshipgreat));
-                cmd.Parameters.Add(new SqlParameter("@ScholarshipGreatPerfect", scholarshipfund.scholarshipgreatperfect));
-                cmd.Parameters.Add(new SqlParameter("@ScholarshipPerfect", scholarshipfund.scholarshipperfect));
-                cmd.Parameters.Add(new SqlParameter("@BaseScholarship", scholarshipfund.basescholarship));
-                cmd.Parameters.Add(new SqlParameter("@TotalSum", scholarshipfund.totalsum));
+                cmd.Parameters.Add(new SqlParameter("@FormationDate", scholarshipfundObj.formationdate));
+                cmd.Parameters.Add(new SqlParameter("@ScholarshipSocial", scholarshipfundObj.scholarshipsocial));
+                cmd.Parameters.Add(new SqlParameter("@ScholarshipGreat", scholarshipfundObj.scholarshipgreat));
+                cmd.Parameters.Add(new SqlParameter("@ScholarshipGreatPerfect", scholarshipfundObj.scholarshipgreatperfect));
+                cmd.Parameters.Add(new SqlParameter("@ScholarshipPerfect", scholarshipfundObj.scholarshipperfect));
+                cmd.Parameters.Add(new SqlParameter("@BaseScholarship", scholarshipfundObj.basescholarship));
+                cmd.Parameters.Add(new SqlParameter("@TotalSum", scholarshipfundObj.totalsum));
                 cmd.Parameters.Add(new SqlParameter("@ID", id));
                 cmd.ExecuteNonQuery();
             }
@@ -121,7 +123,7 @@ namespace TermProjectBookkeeping.DAO
             return result;
         }
 
-        public bool AddRecord(ScholarshipFund scholarshipfund)
+        public bool AddRecord(scholarshipfund scholarshipfundObj)
         {
             Connect();
             bool result = true;
@@ -132,13 +134,13 @@ namespace TermProjectBookkeeping.DAO
                     "scholarshipgreatperfect, scholarshipperfect, basescholarship, totalsum) " +
                     "VALUES (@FormationDate, @ScholarshipSocial, @ScholarshipGreat, " +
                     "@ScholarshipGreatPerfect, @ScholarshipPerfect, @BaseScholarship, @TotalSum)", Con);
-                cmd.Parameters.Add(new SqlParameter("@FormationDate", scholarshipfund.formationdate));
-                cmd.Parameters.Add(new SqlParameter("@ScholarshipSocial", scholarshipfund.scholarshipsocial));
-                cmd.Parameters.Add(new SqlParameter("@ScholarshipGreat", scholarshipfund.scholarshipgreat));
-                cmd.Parameters.Add(new SqlParameter("@ScholarshipGreatPerfect", scholarshipfund.scholarshipgreatperfect));
-                cmd.Parameters.Add(new SqlParameter("@ScholarshipPerfect", scholarshipfund.scholarshipperfect));
-                cmd.Parameters.Add(new SqlParameter("@BaseScholarship", scholarshipfund.basescholarship));
-                cmd.Parameters.Add(new SqlParameter("@TotalSum", scholarshipfund.totalsum));
+                cmd.Parameters.Add(new SqlParameter("@FormationDate", scholarshipfundObj.formationdate));
+                cmd.Parameters.Add(new SqlParameter("@ScholarshipSocial", scholarshipfundObj.scholarshipsocial));
+                cmd.Parameters.Add(new SqlParameter("@ScholarshipGreat", scholarshipfundObj.scholarshipgreat));
+                cmd.Parameters.Add(new SqlParameter("@ScholarshipGreatPerfect", scholarshipfundObj.scholarshipgreatperfect));
+                cmd.Parameters.Add(new SqlParameter("@ScholarshipPerfect", scholarshipfundObj.scholarshipperfect));
+                cmd.Parameters.Add(new SqlParameter("@BaseScholarship", scholarshipfundObj.basescholarship));
+                cmd.Parameters.Add(new SqlParameter("@TotalSum", scholarshipfundObj.totalsum));
                 cmd.ExecuteNonQuery();
             }
             catch (Exception)
@@ -152,7 +154,7 @@ namespace TermProjectBookkeeping.DAO
             return result;
         }
 
-        public bool DeleteRecord(int id, ScholarshipFund scholarshipfund)
+        public bool DeleteRecord(int id, scholarshipfund scholarshipfundObj)
         {
             Connect();
             bool result = true;

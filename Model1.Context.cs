@@ -13,10 +13,10 @@ namespace TermProjectBookkeeping
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class bookkeepingEntities : DbContext
+    public partial class bookkeepingEntities2 : DbContext
     {
-        public bookkeepingEntities()
-            : base("name=bookkeepingEntities")
+        public bookkeepingEntities2()
+            : base("name=bookkeepingEntities2")
         {
         }
     
@@ -25,5 +25,12 @@ namespace TermProjectBookkeeping
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<employeesalary> employeesalary { get; set; }
+        public virtual DbSet<purchaselist> purchaselist { get; set; }
+        public virtual DbSet<salaryfund> salaryfund { get; set; }
+        public virtual DbSet<scholarshipfund> scholarshipfund { get; set; }
+        public virtual DbSet<studentscholarship> studentscholarship { get; set; }
+        public virtual DbSet<userrole> userrole { get; set; }
+        public virtual DbSet<userinfo> userinfo { get; set; }
     }
 }

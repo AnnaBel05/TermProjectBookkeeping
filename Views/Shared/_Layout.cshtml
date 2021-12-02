@@ -8,6 +8,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+    <div class="navbar navbar-default"></div>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -23,6 +24,13 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Purchase list", "Index", "PurchaseList")</li>
+                    <li>@Html.ActionLink("Employee salary", "Index", "EmployeeSalary")</li>
+                    <li>@Html.ActionLink("Salary fund", "Index", "SalaryFund")</li>
+                    <li>@Html.ActionLink("Student scholarship", "Index", "StudentScholarship")</li>
+                    <li>@Html.ActionLink("Scholarship fund", "Index", "ScholarshipFund")</li>
+                    <li>@Html.ActionLink("User info", "Index", "UserInfo")</li>
+                    <li>@Html.ActionLink("User role", "Index", "UserRole")</li>
                 </ul>
             </div>
         </div>
@@ -34,6 +42,8 @@
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
+
+    <p></p>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

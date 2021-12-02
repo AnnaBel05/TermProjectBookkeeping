@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using TermProjectBookkeeping.Models;
+//using TermProjectBookkeeping.Models;
+using TermProjectBookkeeping;
 
 namespace TermProjectBookkeeping.DAO
 {
@@ -14,24 +15,24 @@ namespace TermProjectBookkeeping.DAO
     */
     public class StudentScholarshipDAO : DAO
     {
-        public List<StudentScholarship> GetAllRecords()
+        public List<studentscholarship> GetAllRecords()
         {
             Connect();
-            List<StudentScholarship> studentScholarships = new List<StudentScholarship>();
+            List<studentscholarship> studentScholarships = new List<studentscholarship>();
             try
             {
                 SqlCommand command = new SqlCommand("SELECT * FROM studentscholarship", Con);
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    StudentScholarship studentscholarship = new StudentScholarship();
-                    studentscholarship.id = Convert.ToInt32(reader["id"]);
-                    studentscholarship.student = Convert.ToInt32(reader["student"]);
-                    studentscholarship.grades = Convert.ToInt32(reader["grades"]);
-                    studentscholarship.scholarshiptype = Convert.ToInt32(reader["scholarshiptype"]);
-                    studentscholarship.ifsocial = Convert.ToBoolean(reader["ifsocial"]);
-                    studentscholarship.ifsocialhelp = Convert.ToBoolean(reader["ifsocialhelp"]);
-                    studentScholarships.Add(studentscholarship);
+                    studentscholarship studentscholarshipObj = new studentscholarship();
+                    studentscholarshipObj.id = Convert.ToInt32(reader["id"]);
+                    studentscholarshipObj.student = Convert.ToInt32(reader["student"]);
+                    studentscholarshipObj.grades = Convert.ToInt32(reader["grades"]);
+                    studentscholarshipObj.scholarshiptype = Convert.ToInt32(reader["scholarshiptype"]);
+                    studentscholarshipObj.ifsocial = Convert.ToBoolean(reader["ifsocial"]);
+                    studentscholarshipObj.ifsocialhelp = Convert.ToBoolean(reader["ifsocialhelp"]);
+                    studentScholarships.Add(studentscholarshipObj);
                 }
                 reader.Close();
 
@@ -47,10 +48,10 @@ namespace TermProjectBookkeeping.DAO
             return studentScholarships;
         }
 
-        public StudentScholarship GetRecord(int id)
+        public studentscholarship GetRecord(int id)
         {
             Connect();
-            StudentScholarship studentscholarship = new StudentScholarship();
+            studentscholarship studentscholarshipObj = new studentscholarship();
             try
             {
                 SqlCommand cmd = new SqlCommand("SELECT * FROM studentscholarship where id = @ID", Con);
@@ -59,12 +60,12 @@ namespace TermProjectBookkeeping.DAO
 
                 reader.Read();
 
-                studentscholarship.id = Convert.ToInt32(reader["id"]);
-                studentscholarship.student = Convert.ToInt32(reader["student"]);
-                studentscholarship.grades = Convert.ToInt32(reader["grades"]);
-                studentscholarship.scholarshiptype = Convert.ToInt32(reader["scholarshiptype"]);
-                studentscholarship.ifsocial = Convert.ToBoolean(reader["ifsocial"]);
-                studentscholarship.ifsocialhelp = Convert.ToBoolean(reader["ifsocialhelp"]);
+                studentscholarshipObj.id = Convert.ToInt32(reader["id"]);
+                studentscholarshipObj.student = Convert.ToInt32(reader["student"]);
+                studentscholarshipObj.grades = Convert.ToInt32(reader["grades"]);
+                studentscholarshipObj.scholarshiptype = Convert.ToInt32(reader["scholarshiptype"]);
+                studentscholarshipObj.ifsocial = Convert.ToBoolean(reader["ifsocial"]);
+                studentscholarshipObj.ifsocialhelp = Convert.ToBoolean(reader["ifsocialhelp"]);
 
                 reader.Close();
 
@@ -77,10 +78,10 @@ namespace TermProjectBookkeeping.DAO
             {
                 Disconnect();
             }
-            return studentscholarship;
+            return studentscholarshipObj;
         }
 
-        public bool UpdateRecord(int id, StudentScholarship studentscholarship)
+        public bool UpdateRecord(int id, studentscholarship studentscholarshipObj)
         {
             Connect();
             bool result = true;
@@ -94,11 +95,11 @@ namespace TermProjectBookkeeping.DAO
                     " ifsocialhelp = @IfSocialHelp " +
                     " WHERE id = @ID ", Con);
 
-                cmd.Parameters.Add(new SqlParameter("@Student", studentscholarship.student));
-                cmd.Parameters.Add(new SqlParameter("@Grades", studentscholarship.grades));
-                cmd.Parameters.Add(new SqlParameter("@ScholarshipType", studentscholarship.scholarshiptype));
-                cmd.Parameters.Add(new SqlParameter("@IfSocial", studentscholarship.ifsocial));
-                cmd.Parameters.Add(new SqlParameter("@IfSocialHelp", studentscholarship.ifsocialhelp));
+                cmd.Parameters.Add(new SqlParameter("@Student", studentscholarshipObj.student));
+                cmd.Parameters.Add(new SqlParameter("@Grades", studentscholarshipObj.grades));
+                cmd.Parameters.Add(new SqlParameter("@ScholarshipType", studentscholarshipObj.scholarshiptype));
+                cmd.Parameters.Add(new SqlParameter("@IfSocial", studentscholarshipObj.ifsocial));
+                cmd.Parameters.Add(new SqlParameter("@IfSocialHelp", studentscholarshipObj.ifsocialhelp));
                 cmd.Parameters.Add(new SqlParameter("@ID", id));
                 cmd.ExecuteNonQuery();
             }
@@ -113,7 +114,7 @@ namespace TermProjectBookkeeping.DAO
             return result;
         }
 
-        public bool AddRecord(StudentScholarship studentscholarship)
+        public bool AddRecord(studentscholarship studentscholarshipObj)
         {
             Connect();
             bool result = true;
@@ -122,11 +123,11 @@ namespace TermProjectBookkeeping.DAO
                 SqlCommand cmd = new SqlCommand("INSERT INTO " +
                     "studentscholarship(student, grades, scholarshiptype, ifsocial, ifsocialhelp) " +
                     "VALUES (@Student, @Grades, @ScholarshipType, @IfSocial, @IfSocialHelp)", Con);
-                cmd.Parameters.Add(new SqlParameter("@Student", studentscholarship.student));
-                cmd.Parameters.Add(new SqlParameter("@Grades", studentscholarship.grades));
-                cmd.Parameters.Add(new SqlParameter("@ScholarshipType", studentscholarship.scholarshiptype));
-                cmd.Parameters.Add(new SqlParameter("@IfSocial", studentscholarship.ifsocial));
-                cmd.Parameters.Add(new SqlParameter("@IfSocialHelp", studentscholarship.ifsocialhelp));
+                cmd.Parameters.Add(new SqlParameter("@Student", studentscholarshipObj.student));
+                cmd.Parameters.Add(new SqlParameter("@Grades", studentscholarshipObj.grades));
+                cmd.Parameters.Add(new SqlParameter("@ScholarshipType", studentscholarshipObj.scholarshiptype));
+                cmd.Parameters.Add(new SqlParameter("@IfSocial", studentscholarshipObj.ifsocial));
+                cmd.Parameters.Add(new SqlParameter("@IfSocialHelp", studentscholarshipObj.ifsocialhelp));
                 cmd.ExecuteNonQuery();
             }
             catch (Exception)
@@ -140,7 +141,7 @@ namespace TermProjectBookkeeping.DAO
             return result;
         }
 
-        public bool DeleteRecord(int id, StudentScholarship studentscholarship)
+        public bool DeleteRecord(int id, studentscholarship studentscholarshipObj)
         {
             Connect();
             bool result = true;

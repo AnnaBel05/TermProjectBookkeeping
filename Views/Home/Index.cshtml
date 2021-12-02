@@ -1,30 +1,8 @@
-﻿@model IEnumerable<TermProjectBookkeeping.Models.UserRole>
-@{ 
-    ViewBag.Title = "Список ролей";
+﻿
+@{
+    ViewBag.Title = "Index";
 }
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.rolename)
-        </th>
-        <th></th>
-    </tr>
+<h2>Index</h2>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.rolename)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-    </td>
-</tr>
-}
-
-</table>
+<p>Hello from our View Template!</p>

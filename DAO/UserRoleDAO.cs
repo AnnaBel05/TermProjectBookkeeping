@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using TermProjectBookkeeping.Models;
+//using TermProjectBookkeeping.Models;
+using TermProjectBookkeeping;
 
 namespace TermProjectBookkeeping.DAO
 {
@@ -14,20 +15,20 @@ namespace TermProjectBookkeeping.DAO
     */
     public class UserRoleDAO : DAO
     {
-        public List<UserRole> GetAllRecords()
+        public List<userrole> GetAllRecords()
         {
             Connect();
-            List<UserRole> roleList = new List<UserRole>();
+            List<userrole> roleList = new List<userrole>();
             try
             {
                 SqlCommand command = new SqlCommand("SELECT * FROM userrole", Con);
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    UserRole userrole = new UserRole();
-                    userrole.ID = Convert.ToInt32(reader["id"]);
-                    userrole.rolename = Convert.ToString(reader["rolename"]);
-                    roleList.Add(userrole);
+                    userrole userroleObj = new userrole();
+                    userroleObj.id = Convert.ToInt32(reader["id"]);
+                    userroleObj.rolename = Convert.ToString(reader["rolename"]);
+                    roleList.Add(userroleObj);
                  
                 }
                 reader.Close();
@@ -44,10 +45,10 @@ namespace TermProjectBookkeeping.DAO
             return roleList;
         }
 
-        public UserRole GetRecord(int id)
+        public userrole GetRecord(int id)
         {
             Connect();
-            UserRole userrole = new UserRole();
+            userrole userroleObj = new userrole();
             try
             {
                 SqlCommand cmd = new SqlCommand("SELECT * FROM userrole where id = @ID", Con);
@@ -56,8 +57,8 @@ namespace TermProjectBookkeeping.DAO
 
                 reader.Read();
 
-                userrole.ID = Convert.ToInt32(reader["id"]);
-                userrole.rolename = Convert.ToString(reader["rolename"]);
+                userroleObj.id = Convert.ToInt32(reader["id"]);
+                userroleObj.rolename = Convert.ToString(reader["rolename"]);
 
                 reader.Close();
 
@@ -70,10 +71,10 @@ namespace TermProjectBookkeeping.DAO
             {
                 Disconnect();
             }
-            return userrole;
+            return userroleObj;
         }
 
-        public bool UpdateRecord(int id, UserRole userrole)
+        public bool UpdateRecord(int id, userrole userroleObj)
         {
             Connect();
             bool result = true;
@@ -81,7 +82,7 @@ namespace TermProjectBookkeeping.DAO
             {
                 SqlCommand cmd = new SqlCommand("UPDATE userrole SET rolename = @RoleName WHERE id = @ID", Con);
                 
-                cmd.Parameters.Add(new SqlParameter("@RoleName", userrole.rolename));
+                cmd.Parameters.Add(new SqlParameter("@RoleName", userroleObj.rolename));
                 cmd.Parameters.Add(new SqlParameter("@ID", id));
                 cmd.ExecuteNonQuery();
             }
@@ -96,14 +97,14 @@ namespace TermProjectBookkeeping.DAO
             return result;
         }
 
-        public bool AddRecord(UserRole userrole)
+        public bool AddRecord(userrole userroleObj)
         {
             Connect();
             bool result = true;
             try
             {
                 SqlCommand cmd = new SqlCommand("INSERT INTO userrole(rolename) VALUES (@RoleName)", Con);
-                cmd.Parameters.Add(new SqlParameter("@RoleName", userrole.rolename));
+                cmd.Parameters.Add(new SqlParameter("@RoleName", userroleObj.rolename));
                 cmd.ExecuteNonQuery();
             }
             catch (Exception)
@@ -117,13 +118,13 @@ namespace TermProjectBookkeeping.DAO
             return result;
         }
 
-        public bool DeleteRecord(int id, UserRole userrole)
+        public bool DeleteRecord(int id, userrole userroleObj)
         {
             Connect();
             bool result = true;
             try
             {
-                SqlCommand cmd = new SqlCommand("DELETE FROM userrole WHERE Id=@ID", Con);
+                SqlCommand cmd = new SqlCommand("DELETE FROM userrole WHERE id=@ID", Con);
                 cmd.Parameters.Add(new SqlParameter("@ID", id));
                 cmd.ExecuteNonQuery();
             }

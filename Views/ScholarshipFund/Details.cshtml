@@ -1,0 +1,74 @@
+﻿@model TermProjectBookkeeping.scholarshipfund
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>scholarshipfund</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.formationdate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.formationdate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.scholarshipsocial)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.scholarshipsocial)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.scholarshipgreat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.scholarshipgreat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.scholarshipgreatperfect)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.scholarshipgreatperfect)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.scholarshipperfect)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.scholarshipperfect)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.basescholarship)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.basescholarship)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.totalsum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.totalsum)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
