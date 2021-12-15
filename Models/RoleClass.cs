@@ -10,6 +10,7 @@ namespace TermProjectBookkeeping
     public class RoleClass : RoleProvider
     {
         UserInfoDAO userinfoDAO = new UserInfoDAO();
+        UserRoleDAO userroleDAO = new UserRoleDAO();
         public override string ApplicationName { get; set; }
 
         public override void AddUsersToRoles(string[] usernames, string[] roleNames)
@@ -39,12 +40,27 @@ namespace TermProjectBookkeeping
 
         public override string[] GetRolesForUser(string username)
         {
-            /*List<userinfo> userlist = userinfoDAO.GetAllRecords();
-            var user = userlist.Where(a => a.email == username).FirstOrDefault().userrole.rolename.ToString();
-            string[] roles = { user };
+            List<userrole> userrole = userroleDAO.GetAllRecords();
+            string[] roleArray;
+            List<string> roles = new List<string>();
+            int count = 0;
+            foreach (userrole i in userrole)
+            {
+                roles.Add(i.rolename);
+                count += 1;
+            }
 
-            return roles;*/
-            throw new NotImplementedException();
+            roleArray = new string[count];
+
+            count = 0;
+            foreach (string str in roles)
+            {
+                roleArray[count] = str;
+                count += 1;
+            }
+
+            return roleArray;
+            //throw new NotImplementedException();
         }
 
         public override string[] GetUsersInRole(string roleName)

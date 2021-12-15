@@ -60,7 +60,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="student" Type="int" Nullable="false" />
           <Property Name="grades" Type="int" Nullable="false" />
-          <Property Name="scholarshiptype" Type="int" Nullable="false" />
+          <Property Name="scholarshiptype" Type="int" />
           <Property Name="ifsocial" Type="bit" Nullable="false" />
           <Property Name="ifsocialhelp" Type="bit" Nullable="false" />
         </EntityType>
@@ -169,9 +169,9 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="student" Type="Int32" Nullable="false" />
           <Property Name="grades" Type="Int32" Nullable="false" />
-          <Property Name="scholarshiptype" Type="Int32" Nullable="false" />
           <Property Name="ifsocial" Type="Boolean" Nullable="false" />
           <Property Name="ifsocialhelp" Type="Boolean" Nullable="false" />
+          <Property Name="scholarshiptype" Type="Int32" />
         </EntityType>
         <EntityType Name="userrole">
           <Key>
@@ -282,10 +282,10 @@
           <EntitySetMapping Name="studentscholarship">
             <EntityTypeMapping TypeName="bookkeepingModel1.studentscholarship">
               <MappingFragment StoreEntitySet="studentscholarship">
+                <ScalarProperty Name="scholarshiptype" ColumnName="scholarshiptype" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="student" ColumnName="student" />
                 <ScalarProperty Name="grades" ColumnName="grades" />
-                <ScalarProperty Name="scholarshiptype" ColumnName="scholarshiptype" />
                 <ScalarProperty Name="ifsocial" ColumnName="ifsocial" />
                 <ScalarProperty Name="ifsocialhelp" ColumnName="ifsocialhelp" />
               </MappingFragment>

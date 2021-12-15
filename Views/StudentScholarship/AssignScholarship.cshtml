@@ -1,0 +1,52 @@
+﻿@model IEnumerable<TermProjectBookkeeping.studentscholarship>
+
+@{
+    ViewBag.Title = "AssignScholarship";
+}
+
+<h2>AssignScholarship</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.student)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.grades)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.scholarshiptype)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ifsocial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ifsocialhelp)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.student)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.grades)
+    </td>
+    <th>
+        @Html.DisplayFor(modelItem => item.scholarshiptype)
+    </th>
+    <td>
+        @Html.DisplayFor(modelItem => item.ifsocial)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ifsocialhelp)
+    </td>
+</tr>
+}
+
+</table>

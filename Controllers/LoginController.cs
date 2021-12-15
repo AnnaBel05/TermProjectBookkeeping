@@ -21,8 +21,12 @@ namespace TermProjectBookkeeping.Controllers
         [HttpPost]
         public ActionResult Register(userinfo userinfoObj)
         {
-            userinfoDAO.AddRecord(userinfoObj);
-            return View();
+            if (userinfoDAO.AddRecord(userinfoObj))
+            { return RedirectToAction("Index", "Home"); }
+            else
+            {
+                return RedirectToAction("Error", "Shared");
+            }
         }
 
         public ActionResult Login()
@@ -34,18 +38,35 @@ namespace TermProjectBookkeeping.Controllers
         public ActionResult Login(Login login)
         {
             List<userinfo> userlist = userinfoDAO.GetAllRecords();
-            var user = userlist.Where(a => a.email == login.Email && a.password == login.Password);
-            if (user != null)
+            //List<userinfo> checkinfo = new List<userinfo>();
+            bool checkinfo = false;
+            foreach (userinfo check in userlist)
             {
-                var Ticket = new FormsAuthenticationTicket(login.Email, true, 3000);
+                if ((check.email == login.Email) && (check.password == login.Password))
+                {
+                    checkinfo = true;
+                }
+                else checkinfo = false;
+            }
+            
+            //var user = userlist.Where(a => a.email == login.Email && a.password == login.Password);
+            if (checkinfo == true)
+            {
+                /*var Ticket = new FormsAuthenticationTicket(login.Email, true, 3000);
                 string Encrypt = FormsAuthentication.Encrypt(Ticket);
                 var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, Encrypt);
                 cookie.Expires = DateTime.Now.AddHours(3000);
                 cookie.HttpOnly = true;
-                Response.Cookies.Add(cookie);
+                Response.Cookies.Add(cookie);*/
+
+                FormsAuthentication.SetAuthCookie(login.Email, true);
+                
                 return RedirectToAction("Index", "Home");
             }
-            return View(); ;
+            else
+            {
+                return View();
+            }
         }
 
         public ActionResult Logout()

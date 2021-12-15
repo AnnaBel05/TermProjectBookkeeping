@@ -67,10 +67,10 @@ namespace TermProjectBookkeeping.Controllers
             {
                 // TODO: Add update logic here
 
-                if (purchaseListDAO.UpdateRecord(id, purchaseList))
+                /*if (purchaseListDAO.UpdateRecord(id, purchaseList))
                 {
                     return RedirectToAction("Index");
-                }
+                }*/
 
                 return RedirectToAction("Index");
 

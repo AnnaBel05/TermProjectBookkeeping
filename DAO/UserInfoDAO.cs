@@ -102,7 +102,7 @@ namespace TermProjectBookkeeping.DAO
                 cmd.Parameters.Add(new SqlParameter("@LastName", userinfoObj.lastname));
                 cmd.Parameters.Add(new SqlParameter("@UserName", userinfoObj.username));
                 cmd.Parameters.Add(new SqlParameter("@Patronymic", userinfoObj.patronymic));
-                cmd.Parameters.Add(new SqlParameter("@UserRoleID", userinfoObj.userroleid));
+                //cmd.Parameters.Add(new SqlParameter("@UserRoleID", userinfoObj.userroleid));
                 cmd.Parameters.Add(new SqlParameter("@Email", userinfoObj.email));
                 cmd.Parameters.Add(new SqlParameter("@Password", userinfoObj.password));
                 cmd.Parameters.Add(new SqlParameter("@ID", id));
@@ -126,8 +126,8 @@ namespace TermProjectBookkeeping.DAO
             try
             {
                 SqlCommand cmd = new SqlCommand("INSERT INTO " +
-                    "userinfo(lastname, username, patronymic, userroleid, email, password) " +
-                    "VALUES (@LastName, @UserName, @Patronymic, @UserRoleID, @Email, @Password )", Con);
+                    "userinfo(lastname, username, patronymic, email, password) " +
+                    "VALUES (@LastName, @UserName, @Patronymic, @Email, @Password )", Con);
                 cmd.Parameters.Add(new SqlParameter("@LastName", userinfoObj.lastname));
                 cmd.Parameters.Add(new SqlParameter("@UserName", userinfoObj.username));
                 cmd.Parameters.Add(new SqlParameter("@Patronymic", userinfoObj.patronymic));
