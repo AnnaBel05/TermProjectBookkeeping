@@ -10,6 +10,7 @@ namespace TermProjectBookkeeping.Controllers
     public class StudentScholarshipController : Controller
     {
         StudentScholarshipDAO studentscholarshipDAO = new StudentScholarshipDAO();
+        ScholarshipFundDAO scholarshipfundDAO = new ScholarshipFundDAO();
 
         // GET: PurchaseList
         public ActionResult Index()
@@ -106,6 +107,12 @@ namespace TermProjectBookkeeping.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult AssignScholarship(int id)
+        {
+
+            return View();
         }
     }
 }

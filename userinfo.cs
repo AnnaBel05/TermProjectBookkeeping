@@ -19,6 +19,8 @@ namespace TermProjectBookkeeping
         public string username { get; set; }
         public string patronymic { get; set; }
         public int userroleid { get; set; }
+        public string email { get; set; }
+        public string password { get; set; }
     
         public virtual userrole userrole { get; set; }
     }

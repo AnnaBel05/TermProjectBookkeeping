@@ -31,6 +31,8 @@ namespace TermProjectBookkeeping.DAO
                     userinfoObj.username = Convert.ToString(reader["username"]);
                     userinfoObj.patronymic = Convert.ToString(reader["patronymic"]);
                     userinfoObj.userroleid = Convert.ToInt32(reader["userroleid"]);
+                    userinfoObj.email = Convert.ToString(reader["email"]);
+                    userinfoObj.password = Convert.ToString(reader["password"]);
                     infoList.Add(userinfoObj);
 
                 }
@@ -65,6 +67,8 @@ namespace TermProjectBookkeeping.DAO
                 userinfoObj.username = Convert.ToString(reader["username"]);
                 userinfoObj.patronymic = Convert.ToString(reader["patronymic"]);
                 userinfoObj.userroleid = Convert.ToInt32(reader["userroleid"]);
+                userinfoObj.email = Convert.ToString(reader["email"]);
+                userinfoObj.password = Convert.ToString(reader["password"]);
 
                 reader.Close();
 
@@ -91,12 +95,16 @@ namespace TermProjectBookkeeping.DAO
                     " username = @UserName " +
                     " patronymic = @Patronymic " +
                     " userroleid = @UserRoleID " +
+                    " email = @Email" +
+                    " password = @Password" +
                     " WHERE id = @ID ", Con);
 
                 cmd.Parameters.Add(new SqlParameter("@LastName", userinfoObj.lastname));
                 cmd.Parameters.Add(new SqlParameter("@UserName", userinfoObj.username));
                 cmd.Parameters.Add(new SqlParameter("@Patronymic", userinfoObj.patronymic));
                 cmd.Parameters.Add(new SqlParameter("@UserRoleID", userinfoObj.userroleid));
+                cmd.Parameters.Add(new SqlParameter("@Email", userinfoObj.email));
+                cmd.Parameters.Add(new SqlParameter("@Password", userinfoObj.password));
                 cmd.Parameters.Add(new SqlParameter("@ID", id));
                 cmd.ExecuteNonQuery();
             }
@@ -118,12 +126,14 @@ namespace TermProjectBookkeeping.DAO
             try
             {
                 SqlCommand cmd = new SqlCommand("INSERT INTO " +
-                    "userinfo(lastname, username, patronymic, userroleid) " +
-                    "VALUES (@LastName, @UserName, @Patronymic, @UserRoleID )", Con);
+                    "userinfo(lastname, username, patronymic, userroleid, email, password) " +
+                    "VALUES (@LastName, @UserName, @Patronymic, @UserRoleID, @Email, @Password )", Con);
                 cmd.Parameters.Add(new SqlParameter("@LastName", userinfoObj.lastname));
                 cmd.Parameters.Add(new SqlParameter("@UserName", userinfoObj.username));
                 cmd.Parameters.Add(new SqlParameter("@Patronymic", userinfoObj.patronymic));
-                cmd.Parameters.Add(new SqlParameter("@UserRoleID", userinfoObj.userroleid));
+                //cmd.Parameters.Add(new SqlParameter("@UserRoleID", userinfoObj.userroleid));
+                cmd.Parameters.Add(new SqlParameter("@Email", userinfoObj.email));
+                cmd.Parameters.Add(new SqlParameter("@Password",userinfoObj.password));
                 cmd.ExecuteNonQuery();
             }
             catch (Exception)

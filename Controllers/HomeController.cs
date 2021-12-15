@@ -39,6 +39,7 @@ namespace TermProjectBookkeeping.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult PurchaseList()
         {
 

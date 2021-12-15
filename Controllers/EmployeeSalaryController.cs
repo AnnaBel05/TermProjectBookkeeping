@@ -7,28 +7,32 @@ using TermProjectBookkeeping.DAO;
 
 namespace TermProjectBookkeeping.Controllers
 {
+
     public class EmployeeSalaryController : Controller
     {
         EmployeeSalaryDAO employeesalaryDAO = new EmployeeSalaryDAO();
 
+        [Authorize]
         // GET: PurchaseList
         public ActionResult Index()
         {
             return View(employeesalaryDAO.GetAllRecords());
         }
 
+        [Authorize]
         // GET: PurchaseList/Details/5
         public ActionResult Details(int id)
         {
             return View(employeesalaryDAO.GetRecord(id));
         }
-
+        [Authorize]
         // GET: PurchaseList/Create
         public ActionResult Create()
         {
             return View();
         }
 
+        [Authorize]
         // POST: PurchaseList/Create
         [HttpPost]
         public ActionResult Create([Bind(Exclude = "ID")] employeesalary employeeSalary)
@@ -52,12 +56,14 @@ namespace TermProjectBookkeeping.Controllers
             }
         }
 
+        [Authorize]
         // GET: PurchaseList/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
+        [Authorize]
         // POST: PurchaseList/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, employeesalary employeeSalary)
@@ -80,12 +86,14 @@ namespace TermProjectBookkeeping.Controllers
             }
         }
 
+        [Authorize]
         // GET: PurchaseList/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
+        [Authorize]
         // POST: PurchaseList/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, employeesalary employeeSalary)

@@ -64,19 +64,16 @@
           <Property Name="ifsocial" Type="bit" Nullable="false" />
           <Property Name="ifsocialhelp" Type="bit" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'bookkeeping.dbo.userinfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="userinfo">
           <Key>
             <PropertyRef Name="id" />
-            <PropertyRef Name="lastname" />
-            <PropertyRef Name="username" />
-            <PropertyRef Name="userroleid" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="lastname" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="patronymic" Type="varchar" MaxLength="50" />
+          <Property Name="patronymic" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="userroleid" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="userrole">
@@ -106,16 +103,8 @@ warning 6002: The table/view 'bookkeeping.dbo.userinfo' does not have a primary 
           <EntitySet Name="salaryfund" EntityType="Self.salaryfund" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="scholarshipfund" EntityType="Self.scholarshipfund" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="studentscholarship" EntityType="Self.studentscholarship" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="userinfo" EntityType="Self.userinfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="userrole" EntityType="Self.userrole" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="userinfo" EntityType="Self.userinfo" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [userinfo].[id] AS [id], 
-    [userinfo].[lastname] AS [lastname], 
-    [userinfo].[username] AS [username], 
-    [userinfo].[patronymic] AS [patronymic], 
-    [userinfo].[userroleid] AS [userroleid]
-    FROM [dbo].[userinfo] AS [userinfo]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="userinfo_userrole" Association="Self.userinfo_userrole">
             <End Role="userrole" EntitySet="userrole" />
             <End Role="userinfo" EntitySet="userinfo" />
@@ -195,16 +184,15 @@ warning 6002: The table/view 'bookkeeping.dbo.userinfo' does not have a primary 
         <EntityType Name="userinfo">
           <Key>
             <PropertyRef Name="id" />
-            <PropertyRef Name="lastname" />
-            <PropertyRef Name="username" />
-            <PropertyRef Name="userroleid" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="userroleid" Type="Int32" Nullable="false" />
           <NavigationProperty Name="userrole" Relationship="Self.userinfo_userrole" FromRole="userinfo" ToRole="userrole" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="userinfo_userrole">
           <End Role="userrole" Type="Self.userrole" Multiplicity="1">
@@ -314,6 +302,8 @@ warning 6002: The table/view 'bookkeeping.dbo.userinfo' does not have a primary 
           <EntitySetMapping Name="userinfo">
             <EntityTypeMapping TypeName="bookkeepingModel1.userinfo">
               <MappingFragment StoreEntitySet="userinfo">
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="lastname" ColumnName="lastname" />
                 <ScalarProperty Name="username" ColumnName="username" />

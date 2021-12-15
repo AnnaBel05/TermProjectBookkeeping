@@ -12,6 +12,7 @@ namespace TermProjectBookkeeping.Controllers
         PurchaseListDAO purchaseListDAO = new PurchaseListDAO();
 
         // GET: PurchaseList
+        [Authorize]
         public ActionResult Index()
         {
             return View(purchaseListDAO.GetAllRecords());
