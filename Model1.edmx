@@ -10,11 +10,12 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="employee" Type="int" />
-          <Property Name="hourlyrate" Type="int" />
-          <Property Name="overwork" Type="int" />
-          <Property Name="sickdays" Type="int" />
-          <Property Name="bonus" Type="int" />
+          <Property Name="employee" Type="int" Nullable="false" />
+          <Property Name="overall" Type="int" Nullable="false" />
+          <Property Name="hourspermonth" Type="int" Nullable="false" />
+          <Property Name="overwork" Type="bit" Nullable="false" />
+          <Property Name="sickdays" Type="bit" Nullable="false" />
+          <Property Name="bonus" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="purchaselist">
           <Key>
@@ -60,7 +61,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="student" Type="int" Nullable="false" />
           <Property Name="grades" Type="int" Nullable="false" />
-          <Property Name="scholarshiptype" Type="int" />
+          <Property Name="scholarshiptype" Type="int" Nullable="false" />
           <Property Name="ifsocial" Type="bit" Nullable="false" />
           <Property Name="ifsocialhelp" Type="bit" Nullable="false" />
         </EntityType>
@@ -119,11 +120,12 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="employee" Type="Int32" />
-          <Property Name="hourlyrate" Type="Int32" />
-          <Property Name="overwork" Type="Int32" />
-          <Property Name="sickdays" Type="Int32" />
-          <Property Name="bonus" Type="Int32" />
+          <Property Name="employee" Type="Int32" Nullable="false" />
+          <Property Name="overwork" Type="Boolean" Nullable="false" />
+          <Property Name="sickdays" Type="Boolean" Nullable="false" />
+          <Property Name="bonus" Type="Boolean" Nullable="false" />
+          <Property Name="overall" Type="Int32" Nullable="false" />
+          <Property Name="hourspermonth" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="purchaselist">
           <Key>
@@ -171,7 +173,7 @@
           <Property Name="grades" Type="Int32" Nullable="false" />
           <Property Name="ifsocial" Type="Boolean" Nullable="false" />
           <Property Name="ifsocialhelp" Type="Boolean" Nullable="false" />
-          <Property Name="scholarshiptype" Type="Int32" />
+          <Property Name="scholarshiptype" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="userrole">
           <Key>
@@ -230,9 +232,10 @@
           <EntitySetMapping Name="employeesalary">
             <EntityTypeMapping TypeName="bookkeepingModel1.employeesalary">
               <MappingFragment StoreEntitySet="employeesalary">
+                <ScalarProperty Name="hourspermonth" ColumnName="hourspermonth" />
+                <ScalarProperty Name="overall" ColumnName="overall" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="employee" ColumnName="employee" />
-                <ScalarProperty Name="hourlyrate" ColumnName="hourlyrate" />
                 <ScalarProperty Name="overwork" ColumnName="overwork" />
                 <ScalarProperty Name="sickdays" ColumnName="sickdays" />
                 <ScalarProperty Name="bonus" ColumnName="bonus" />
@@ -326,7 +329,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

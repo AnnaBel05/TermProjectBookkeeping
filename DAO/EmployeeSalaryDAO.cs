@@ -28,10 +28,12 @@ namespace TermProjectBookkeeping.DAO
                     employeesalary employeesalaryObj = new employeesalary();
                     employeesalaryObj.id = Convert.ToInt32(reader["id"]);
                     employeesalaryObj.employee = Convert.ToInt32(reader["employee"]);
-                    employeesalaryObj.hourlyrate = Convert.ToInt32(reader["hourlyrate"]);
-                    employeesalaryObj.overwork = Convert.ToInt32(reader["overwork"]);
-                    employeesalaryObj.sickdays = Convert.ToInt32(reader["sickdays"]);
-                    employeesalaryObj.bonus = Convert.ToInt32(reader["bonus"]);
+                    employeesalaryObj.overall = Convert.ToInt32(reader["overall"]);
+                    employeesalaryObj.hourspermonth = Convert.ToInt32(reader["hourspermonth"]);
+                    //employeesalaryObj.hourlyrate = Convert.ToInt32(reader["hourlyrate"]);
+                    employeesalaryObj.overwork = Convert.ToBoolean(reader["overwork"]);
+                    employeesalaryObj.sickdays = Convert.ToBoolean(reader["sickdays"]);
+                    employeesalaryObj.bonus = Convert.ToBoolean(reader["bonus"]);
                     employeeSalaries.Add(employeesalaryObj);
                 }
                 reader.Close();
@@ -62,10 +64,12 @@ namespace TermProjectBookkeeping.DAO
 
                 employeesalaryObj.id = Convert.ToInt32(reader["id"]);
                 employeesalaryObj.employee = Convert.ToInt32(reader["employee"]);
-                employeesalaryObj.hourlyrate = Convert.ToInt32(reader["hourlyrate"]);
-                employeesalaryObj.overwork = Convert.ToInt32(reader["overwork"]);
-                employeesalaryObj.sickdays = Convert.ToInt32(reader["sickdays"]);
-                employeesalaryObj.bonus = Convert.ToInt32(reader["bonus"]);
+                employeesalaryObj.overall = Convert.ToInt32(reader["overall"]);
+                employeesalaryObj.hourspermonth = Convert.ToInt32(reader["hourspermonth"]);
+                //employeesalaryObj.hourlyrate = Convert.ToInt32(reader["hourlyrate"]);
+                employeesalaryObj.overwork = Convert.ToBoolean(reader["overwork"]);
+                employeesalaryObj.sickdays = Convert.ToBoolean(reader["sickdays"]);
+                employeesalaryObj.bonus = Convert.ToBoolean(reader["bonus"]);
 
                 reader.Close();
 
@@ -89,14 +93,17 @@ namespace TermProjectBookkeeping.DAO
             {
                 SqlCommand cmd = new SqlCommand("UPDATE employeesalary SET " +
                     " employee = @Employee" +
-                    " hourlyrate = @Hourlyrate" +
+                    " overall = @Overall" +
+                    " hourspermonth = @Hourspermonth" +
                     " overwork = @Overwork" +
                     " sickdays = @Sickdays " +
                     " bonus = @Bonus " +
                     " WHERE id = @ID ", Con);
 
                 cmd.Parameters.Add(new SqlParameter("@Employee", employeesalaryObj.employee));
-                cmd.Parameters.Add(new SqlParameter("@Hourlyrate", employeesalaryObj.hourlyrate));
+                cmd.Parameters.Add(new SqlParameter("@Overall", employeesalaryObj.overall));
+                cmd.Parameters.Add(new SqlParameter("@Hourspermonth", employeesalaryObj.hourspermonth));
+                //cmd.Parameters.Add(new SqlParameter("@Hourlyrate", employeesalaryObj.hourlyrate));
                 cmd.Parameters.Add(new SqlParameter("@Overwork", employeesalaryObj.overwork));
                 cmd.Parameters.Add(new SqlParameter("@Sickdays", employeesalaryObj.sickdays));
                 cmd.Parameters.Add(new SqlParameter("@Bonus", employeesalaryObj.bonus));
@@ -121,10 +128,12 @@ namespace TermProjectBookkeeping.DAO
             try
             {
                 SqlCommand cmd = new SqlCommand("INSERT INTO " +
-                    "employeesalary(employee, hourlyrate, overwork, sickdays, bonus) " +
-                    "VALUES (@Employee, @Hourlyrate, @Overwork, @Sickdays, @Bonus)", Con);
+                    "employeesalary(employee, overall, hourspermonth, overwork, sickdays, bonus) " +
+                    "VALUES (@Employee, @Overall, @Hourspermonth, @Overwork, @Sickdays, @Bonus)", Con);
                 cmd.Parameters.Add(new SqlParameter("@Employee", employeesalaryObj.employee));
-                cmd.Parameters.Add(new SqlParameter("@Hourlyrate", employeesalaryObj.hourlyrate));
+                cmd.Parameters.Add(new SqlParameter("@Overall", employeesalaryObj.overall));
+                cmd.Parameters.Add(new SqlParameter("@Hourspermonth", employeesalaryObj.hourspermonth));
+                //cmd.Parameters.Add(new SqlParameter("@Hourlyrate", employeesalaryObj.hourlyrate));
                 cmd.Parameters.Add(new SqlParameter("@Overwork", employeesalaryObj.overwork));
                 cmd.Parameters.Add(new SqlParameter("@Sickdays", employeesalaryObj.sickdays));
                 cmd.Parameters.Add(new SqlParameter("@Bonus", employeesalaryObj.bonus));

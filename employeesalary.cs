@@ -15,10 +15,11 @@ namespace TermProjectBookkeeping
     public partial class employeesalary
     {
         public int id { get; set; }
-        public Nullable<int> employee { get; set; }
-        public Nullable<int> hourlyrate { get; set; }
-        public Nullable<int> overwork { get; set; }
-        public Nullable<int> sickdays { get; set; }
-        public Nullable<int> bonus { get; set; }
+        public int employee { get; set; }
+        public bool overwork { get; set; }
+        public bool sickdays { get; set; }
+        public bool bonus { get; set; }
+        public int overall { get; set; }
+        public int hourspermonth { get; set; }
     }
 }

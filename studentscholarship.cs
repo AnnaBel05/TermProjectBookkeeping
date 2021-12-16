@@ -19,6 +19,6 @@ namespace TermProjectBookkeeping
         public int grades { get; set; }
         public bool ifsocial { get; set; }
         public bool ifsocialhelp { get; set; }
-        public Nullable<int> scholarshiptype { get; set; }
+        public int scholarshiptype { get; set; }
     }
 }

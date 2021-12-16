@@ -5,12 +5,16 @@ using System.Web;
 using System.Web.Mvc;
 using TermProjectBookkeeping.DAO;
 
+using log4net;
+using log4net.Config;
+
 namespace TermProjectBookkeeping.Controllers
 {
 
     public class EmployeeSalaryController : Controller
     {
         EmployeeSalaryDAO employeesalaryDAO = new EmployeeSalaryDAO();
+        SalaryFundDAO salaryFundDAO = new SalaryFundDAO();
 
         [Authorize]
         // GET: PurchaseList
@@ -114,6 +118,62 @@ namespace TermProjectBookkeeping.Controllers
             {
                 return View();
             }
+        }
+
+        private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        [Authorize]
+        public ActionResult AssignSalary()
+        {
+
+            log4net.Config.XmlConfigurator.Configure();
+            log.Info("Start SEFOINS;GH;GH;GHD;GEH;UW method");
+
+            List<salaryfund> funds = salaryFundDAO.GetAllRecords();
+            List<employeesalary> salaries = employeesalaryDAO.GetAllRecords();
+
+            //List<studentscholarship> scholarships = studentscholarshipDAO.GetAllRecords();
+            //List<scholarshipfund> funds = scholarshipfundDAO.GetAllRecords();
+
+            DateTime maxDate = funds[1].formationdate;
+            salaryfund useable = new salaryfund();
+            foreach (salaryfund i in funds)
+            {
+                if (i.formationdate > maxDate)
+                {
+                    maxDate = i.formationdate;
+                    useable = i;
+                }
+            }
+
+            log.Info("foreach");
+
+            foreach (employeesalary i in salaries)
+            {
+                i.overall = i.hourspermonth * useable.worktime;
+                if (i.overwork == true) 
+                { 
+                    i.overall += (i.hourspermonth - 160) * useable.overwork; 
+                }
+                if (i.sickdays == true )
+                {
+                    i.overall += (160 - i.hourspermonth) * useable.sickdays;
+                }
+                if (i.bonus == true)
+                {
+                    i.overall += 3000; //обращение к сервису сотрудников за информацией о категориях и т.п.
+                }
+                useable.totalsum -= i.overall;
+            }
+
+            foreach (salaryfund i in funds)
+            {
+                if (useable == i)
+                {
+                    i.totalsum = useable.totalsum;
+                }
+            }
+
+            return View(salaries);
         }
     }
 }

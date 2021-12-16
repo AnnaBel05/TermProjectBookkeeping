@@ -393,6 +393,7 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Login\Register.cshtml" />
     <Content Include="Views\StudentScholarship\AssignScholarship.cshtml" />
+    <Content Include="Views\EmployeeSalary\AssignSalary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

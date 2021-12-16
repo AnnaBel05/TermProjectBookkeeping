@@ -148,6 +148,8 @@ namespace TermProjectBookkeeping.Controllers
 
             foreach (studentscholarship i in scholarships)
             {
+                i.scholarshiptype = useable.basescholarship;
+
                 if (i.grades == 4)
                 {
                     i.scholarshiptype = useable.scholarshipgreat;
@@ -170,6 +172,16 @@ namespace TermProjectBookkeeping.Controllers
                 if (i.ifsocialhelp == true)
                 {
                     i.scholarshiptype += useable.scholarshipsocial * 3;
+                }
+
+                useable.totalsum -= i.scholarshiptype;
+            }
+
+            foreach (scholarshipfund i in funds)
+            {
+                if (useable == i)
+                {
+                    i.totalsum = useable.totalsum;
                 }
             }
 
