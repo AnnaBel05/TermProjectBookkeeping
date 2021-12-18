@@ -1,0 +1,58 @@
+﻿@model TermProjectBookkeeping.studentscholarship
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>studentscholarship</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.student)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.student)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.grades)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.grades)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ifsocial)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ifsocial)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ifsocialhelp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ifsocialhelp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.scholarshiptype)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.scholarshiptype)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

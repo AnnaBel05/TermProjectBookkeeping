@@ -40,6 +40,19 @@ namespace TermProjectBookkeeping
 
         public override string[] GetRolesForUser(string username)
         {
+            using (bookkeepingEntities2 db = new bookkeepingEntities2())
+            {
+                var user = db.userinfo.Include("userrole").Where(a => a.email == username).FirstOrDefault().userrole.rolename;
+                string[] role = { user };
+                return role;
+            }
+
+            //throw new NotImplementedException();
+        }
+
+        /*
+        public override string[] GetRolesForUser(string username)
+        {
             List<userrole> userrole = userroleDAO.GetAllRecords();
             string[] roleArray;
             List<string> roles = new List<string>();
@@ -62,6 +75,8 @@ namespace TermProjectBookkeeping
             return roleArray;
             //throw new NotImplementedException();
         }
+
+        */
 
         public override string[] GetUsersInRole(string roleName)
         {

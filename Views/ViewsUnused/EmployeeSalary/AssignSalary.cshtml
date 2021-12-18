@@ -1,0 +1,63 @@
+﻿@model IEnumerable<TermProjectBookkeeping.employeesalary>
+
+@{
+    ViewBag.Title = "AssignSalary";
+}
+
+<h2>AssignSalary</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.employee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.overwork)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sickdays)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.bonus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.overall)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.hourspermonth)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.employee)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.overwork)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sickdays)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.bonus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.overall)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.hourspermonth)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

@@ -11,7 +11,7 @@ namespace TermProjectBookkeeping.Controllers
 {
     public class LoginController : Controller
     {
-        UserInfoDAO userinfoDAO = new UserInfoDAO();
+        private bookkeepingEntities2 db = new bookkeepingEntities2();
         // GET: Login
         public ActionResult Register()
         {
@@ -21,12 +21,20 @@ namespace TermProjectBookkeeping.Controllers
         [HttpPost]
         public ActionResult Register(userinfo userinfoObj)
         {
-            if (userinfoDAO.AddRecord(userinfoObj))
+            using (db)
+            {
+                db.userinfo.Add(userinfoObj);
+                db.SaveChanges();
+                ModelState.Clear();
+            }
+            return View();
+
+            /*if (userinfoDAO.AddRecord(userinfoObj))
             { return RedirectToAction("Index", "Home"); }
             else
             {
                 return RedirectToAction("Error", "Shared");
-            }
+            }*/
         }
 
         public ActionResult Login()
@@ -37,7 +45,28 @@ namespace TermProjectBookkeeping.Controllers
         [HttpPost]
         public ActionResult Login(Login login)
         {
-            List<userinfo> userlist = userinfoDAO.GetAllRecords();
+            using (db)
+            {
+                var user = db.userinfo.Where(a => a.email == login.Email && a.password == login.Password).FirstOrDefault();
+                if (user != null)
+                {
+                    var Ticket = new FormsAuthenticationTicket(login.Email, true, 3000);
+                    string Encrypt = FormsAuthentication.Encrypt(Ticket);
+                    var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, Encrypt);
+                    cookie.Expires = DateTime.Now.AddHours(3000);
+                    cookie.HttpOnly = true;
+                    Response.Cookies.Add(cookie);
+
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    return View();
+                }
+            }
+
+
+            /*List<userinfo> userlist = userinfoDAO.GetAllRecords();
             //List<userinfo> checkinfo = new List<userinfo>();
             bool checkinfo = false;
             foreach (userinfo check in userlist)
@@ -59,14 +88,14 @@ namespace TermProjectBookkeeping.Controllers
                 cookie.HttpOnly = true;
                 Response.Cookies.Add(cookie);*/
 
-                FormsAuthentication.SetAuthCookie(login.Email, true);
+                /*FormsAuthentication.SetAuthCookie(login.Email, true);
                 
                 return RedirectToAction("Index", "Home");
             }
             else
             {
                 return View();
-            }
+            }*/
         }
 
         public ActionResult Logout()

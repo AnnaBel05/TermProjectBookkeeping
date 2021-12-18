@@ -1,0 +1,66 @@
+﻿@model TermProjectBookkeeping.employeesalary
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>employeesalary</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.employee)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.employee)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.overwork)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.overwork)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sickdays)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sickdays)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bonus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bonus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.overall)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.overall)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hourspermonth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hourspermonth)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
