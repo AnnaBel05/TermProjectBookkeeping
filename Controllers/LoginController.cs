@@ -61,41 +61,10 @@ namespace TermProjectBookkeeping.Controllers
                 }
                 else
                 {
+                    ViewData["Message"] = "Неправильный логин или пароль!";
                     return View();
                 }
             }
-
-
-            /*List<userinfo> userlist = userinfoDAO.GetAllRecords();
-            //List<userinfo> checkinfo = new List<userinfo>();
-            bool checkinfo = false;
-            foreach (userinfo check in userlist)
-            {
-                if ((check.email == login.Email) && (check.password == login.Password))
-                {
-                    checkinfo = true;
-                }
-                else checkinfo = false;
-            }
-            
-            //var user = userlist.Where(a => a.email == login.Email && a.password == login.Password);
-            if (checkinfo == true)
-            {
-                /*var Ticket = new FormsAuthenticationTicket(login.Email, true, 3000);
-                string Encrypt = FormsAuthentication.Encrypt(Ticket);
-                var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, Encrypt);
-                cookie.Expires = DateTime.Now.AddHours(3000);
-                cookie.HttpOnly = true;
-                Response.Cookies.Add(cookie);*/
-
-                /*FormsAuthentication.SetAuthCookie(login.Email, true);
-                
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {
-                return View();
-            }*/
         }
 
         public ActionResult Logout()

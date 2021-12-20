@@ -12,19 +12,19 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.student)
+            <div> Студент </div>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.grades)
+            <div> Тип оценок </div>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ifsocial)
+            <div> Социальная стипендия </div>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ifsocialhelp)
+            <div> Материальная помощь </div>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.scholarshiptype)
+            <div> Стипендия, всего </div>
         </th>
         <th></th>
     </tr>
@@ -52,5 +52,6 @@
             @Html.ActionLink("Delete", "Delete", new { id=item.id })
         </td>
     </tr>
+    @Html.ActionLink("Вернуться к списку", "Index")
 }
 </table>

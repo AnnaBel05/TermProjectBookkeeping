@@ -15,12 +15,14 @@ namespace TermProjectBookkeeping.Controllers
         private bookkeepingEntities2 db = new bookkeepingEntities2();
 
         // GET: studentscholarships
+        [Authorize]
         public ActionResult Index()
         {
             return View(db.studentscholarship.ToList());
         }
 
         // GET: studentscholarships/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,6 +38,7 @@ namespace TermProjectBookkeeping.Controllers
         }
 
         // GET: studentscholarships/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -46,6 +49,7 @@ namespace TermProjectBookkeeping.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "id,student,grades,ifsocial,ifsocialhelp,scholarshiptype")] studentscholarship studentscholarship)
         {
             if (ModelState.IsValid)
@@ -59,6 +63,7 @@ namespace TermProjectBookkeeping.Controllers
         }
 
         // GET: studentscholarships/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,6 +83,7 @@ namespace TermProjectBookkeeping.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "id,student,grades,ifsocial,ifsocialhelp,scholarshiptype")] studentscholarship studentscholarship)
         {
             if (ModelState.IsValid)
@@ -90,6 +96,7 @@ namespace TermProjectBookkeeping.Controllers
         }
 
         // GET: studentscholarships/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -107,6 +114,7 @@ namespace TermProjectBookkeeping.Controllers
         // POST: studentscholarships/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             studentscholarship studentscholarship = db.studentscholarship.Find(id);
@@ -124,6 +132,7 @@ namespace TermProjectBookkeeping.Controllers
             base.Dispose(disposing);
         }
 
+        [Authorize(Roles = "Главный бухгалтер, Суперюзер")]
         public ActionResult AssignScholarship()
         {
             using (db)

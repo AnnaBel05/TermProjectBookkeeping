@@ -85,9 +85,7 @@
           <Property Name="rolename" Type="varchar" MaxLength="50" />
         </EntityType>
         <Association Name="userinfo_userrole">
-          <End Role="userrole" Type="Self.userrole" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="userrole" Type="Self.userrole" Multiplicity="1" />
           <End Role="userinfo" Type="Self.userinfo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="userrole">

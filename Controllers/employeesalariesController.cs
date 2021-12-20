@@ -15,12 +15,14 @@ namespace TermProjectBookkeeping.Controllers
         private bookkeepingEntities2 db = new bookkeepingEntities2();
 
         // GET: employeesalaries
+        [Authorize]
         public ActionResult Index()
         {
             return View(db.employeesalary.ToList());
         }
 
         // GET: employeesalaries/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,6 +38,7 @@ namespace TermProjectBookkeeping.Controllers
         }
 
         // GET: employeesalaries/Create
+        [Authorize(Roles = "Главный бухгалтер")]
         public ActionResult Create()
         {
             return View();
@@ -46,6 +49,7 @@ namespace TermProjectBookkeeping.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Главный бухгалтер")]
         public ActionResult Create([Bind(Include = "id,employee,overwork,sickdays,bonus,overall,hourspermonth")] employeesalary employeesalary)
         {
             if (ModelState.IsValid)
@@ -59,6 +63,7 @@ namespace TermProjectBookkeeping.Controllers
         }
 
         // GET: employeesalaries/Edit/5
+        [Authorize(Roles = "Главный бухгалтер")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,6 +83,7 @@ namespace TermProjectBookkeeping.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Главный бухгалтер")]
         public ActionResult Edit([Bind(Include = "id,employee,overwork,sickdays,bonus,overall,hourspermonth")] employeesalary employeesalary)
         {
             if (ModelState.IsValid)
@@ -90,6 +96,7 @@ namespace TermProjectBookkeeping.Controllers
         }
 
         // GET: employeesalaries/Delete/5
+        [Authorize(Roles = "Главный бухгалтер")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -107,6 +114,7 @@ namespace TermProjectBookkeeping.Controllers
         // POST: employeesalaries/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Главный бухгалтер")]
         public ActionResult DeleteConfirmed(int id)
         {
             employeesalary employeesalary = db.employeesalary.Find(id);
@@ -124,6 +132,7 @@ namespace TermProjectBookkeeping.Controllers
             base.Dispose(disposing);
         }
 
+        [Authorize (Roles = "Главный бухгалтер. Суперюзер")]
         public ActionResult AssignSalary()
         {
             using (db)

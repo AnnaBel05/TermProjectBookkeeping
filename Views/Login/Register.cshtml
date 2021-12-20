@@ -1,29 +1,30 @@
 ﻿@model TermProjectBookkeeping.userinfo
 
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Зарегистрироваться";
 }
 
-<h2>Register</h2>
+<h2>Зарегистрироваться</h2>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>userinfo</h4>
+        <h4>Введите информацию о себе</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.lastname, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.lastname, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.lastname, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        <div class="control-label col-md-2"> Фамилия </div>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.lastname, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.lastname, "", new { @class = "text-danger" })
         </div>
+    </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.username, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="control-label col-md-2"> Имя </div>
+            
             <div class="col-md-10">
                 @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
@@ -31,7 +32,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.patronymic, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="control-label col-md-2"> Отчество </div>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.patronymic, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.patronymic, "", new { @class = "text-danger" })
@@ -39,7 +40,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="control-label col-md-2"> Ваш e-mail </div>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
@@ -47,7 +48,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="control-label col-md-2"> Ваш пароль </div>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
@@ -56,12 +57,8 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Зарегистрироваться" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

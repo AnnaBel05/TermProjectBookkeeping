@@ -1,18 +1,18 @@
 ﻿@model TermProjectBookkeeping.purchaselist
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Удаление";
 }
 
-<h2>Delete</h2>
+<h2>Удалить</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Вы уверены, что хотите удалить данный элемент?</h3>
 <div>
     <h4>purchaselist</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.purchasename)
+            Наименование
         </dt>
 
         <dd>
@@ -20,7 +20,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.purchasedescription)
+            Описание
         </dt>
 
         <dd>
@@ -28,7 +28,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.sender)
+            Кафедра-отправитель
         </dt>
 
         <dd>
@@ -36,7 +36,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.quantity)
+            Количество
         </dt>
 
         <dd>
@@ -44,7 +44,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.price1pc)
+            Цена за 1 шт, руб.
         </dt>
 
         <dd>
@@ -52,7 +52,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.overallsum)
+            Общая стоимость
         </dt>
 
         <dd>
@@ -60,7 +60,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ifapproved)
+            Одобрить
         </dt>
 
         <dd>
@@ -73,8 +73,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Вернуться к списку", "Index")
         </div>
     }
 </div>

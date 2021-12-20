@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Бухгалтерия</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -17,27 +17,27 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Бухгалтерия", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Главная", "Index", "Home")</li>
+                    <li>@Html.ActionLink("О нас", "About", "Home")</li>
                     
 
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Purchase list", "Index", "purchaselists")</li>
-                        <li>@Html.ActionLink("Employee salary", "Index", "employeesalaries")</li>
+                        <li>@Html.ActionLink("Список закупок", "Index", "purchaselists")</li>
+                        <li>@Html.ActionLink("Фонд зарплаты", "Index", "employeesalaries")</li>
                         
-                        <li>@Html.ActionLink("Student scholarship", "Index", "studentscholarships")</li>
+                        <li>@Html.ActionLink("Фонд стипендии", "Index", "studentscholarships")</li>
                         
-                        <li class="right">@Html.ActionLink("Logout", "Logout", "Login")</li>
+                        <li class="right">@Html.ActionLink("Выйти", "Logout", "Login")</li>
                     }
                     else
                     {
-                        <li class="right">@Html.ActionLink("Login", "Login", "Login")</li>
-                        <li class="right">@Html.ActionLink("Register", "Register", "Login")</li>
+                        <li class="right">@Html.ActionLink("Войти", "Login", "Login")</li>
+                        <li class="right">@Html.ActionLink("Зарегистрироваться", "Register", "Login")</li>
                     }
                 </ul>
             </div>

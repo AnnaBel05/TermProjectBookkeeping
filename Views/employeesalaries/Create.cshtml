@@ -1,21 +1,21 @@
 ﻿@model TermProjectBookkeeping.employeesalary
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Создание";
 }
 
-<h2>Create</h2>
+<h2>Создать</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>employeesalary</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.employee, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="control-label col-md-2"> Работник </div>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.employee, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.employee, "", new { @class = "text-danger" })
@@ -23,7 +23,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.overwork, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="control-label col-md-2"> Часы переработки </div>
             <div class="col-md-10">
                 <div class="checkbox">
                     @Html.EditorFor(model => model.overwork)
@@ -33,7 +33,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.sickdays, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="control-label col-md-2"> Больничный </div>
             <div class="col-md-10">
                 <div class="checkbox">
                     @Html.EditorFor(model => model.sickdays)
@@ -43,7 +43,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.bonus, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="control-label col-md-2"> Премия </div>
             <div class="col-md-10">
                 <div class="checkbox">
                     @Html.EditorFor(model => model.bonus)
@@ -53,7 +53,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.overall, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="control-label col-md-2"> З/П </div>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.overall, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.overall, "", new { @class = "text-danger" })
@@ -61,7 +61,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.hourspermonth, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="control-label col-md-2"> Часов в месяц </div>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.hourspermonth, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.hourspermonth, "", new { @class = "text-danger" })
@@ -77,5 +77,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Вернуться к списку", "Index")
 </div>

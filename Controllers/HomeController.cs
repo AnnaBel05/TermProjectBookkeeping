@@ -13,7 +13,6 @@ namespace TermProjectBookkeeping.Controllers
     public class HomeController : Controller
     {
         bookkeepingEntities2 bookkeepingEntities = new bookkeepingEntities2();
-
         public ActionResult Index()
         {
             return View();
@@ -26,6 +25,7 @@ namespace TermProjectBookkeeping.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

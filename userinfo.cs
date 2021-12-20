@@ -11,7 +11,8 @@ namespace TermProjectBookkeeping
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class userinfo
     {
         public int id { get; set; }
@@ -20,8 +21,14 @@ namespace TermProjectBookkeeping
         public string patronymic { get; set; }
         public int userroleid { get; set; }
         public string email { get; set; }
+        [DataType(DataType.Password)]
         public string password { get; set; }
     
         public virtual userrole userrole { get; set; }
+
+        public userinfo()
+        {
+            userroleid = 1;
+        }
     }
 }

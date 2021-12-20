@@ -15,6 +15,7 @@ namespace TermProjectBookkeeping.Controllers
         private bookkeepingEntities2 db = new bookkeepingEntities2();
 
         // GET: userinfoes
+        [Authorize]
         public ActionResult Index()
         {
             var userinfo = db.userinfo.Include(u => u.userrole);
@@ -22,6 +23,7 @@ namespace TermProjectBookkeeping.Controllers
         }
 
         // GET: userinfoes/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,6 +39,7 @@ namespace TermProjectBookkeeping.Controllers
         }
 
         // GET: userinfoes/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.userroleid = new SelectList(db.userrole, "id", "rolename");
@@ -48,6 +51,7 @@ namespace TermProjectBookkeeping.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "id,lastname,username,patronymic,userroleid,email,password")] userinfo userinfo)
         {
             if (ModelState.IsValid)
@@ -62,6 +66,7 @@ namespace TermProjectBookkeeping.Controllers
         }
 
         // GET: userinfoes/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -82,6 +87,7 @@ namespace TermProjectBookkeeping.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "id,lastname,username,patronymic,userroleid,email,password")] userinfo userinfo)
         {
             if (ModelState.IsValid)
@@ -95,6 +101,7 @@ namespace TermProjectBookkeeping.Controllers
         }
 
         // GET: userinfoes/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -112,6 +119,7 @@ namespace TermProjectBookkeeping.Controllers
         // POST: userinfoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             userinfo userinfo = db.userinfo.Find(id);

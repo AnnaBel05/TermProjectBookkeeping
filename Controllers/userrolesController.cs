@@ -15,12 +15,14 @@ namespace TermProjectBookkeeping.Controllers
         private bookkeepingEntities2 db = new bookkeepingEntities2();
 
         // GET: userroles
+        [Authorize(Roles = "Суперюзер")]
         public ActionResult Index()
         {
             return View(db.userrole.ToList());
         }
 
         // GET: userroles/Details/5
+        [Authorize(Roles = "Суперюзер")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,6 +38,7 @@ namespace TermProjectBookkeeping.Controllers
         }
 
         // GET: userroles/Create
+        [Authorize(Roles = "Суперюзер")]
         public ActionResult Create()
         {
             return View();
@@ -46,6 +49,7 @@ namespace TermProjectBookkeeping.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Суперюзер")]
         public ActionResult Create([Bind(Include = "id,rolename")] userrole userrole)
         {
             if (ModelState.IsValid)
@@ -59,6 +63,7 @@ namespace TermProjectBookkeeping.Controllers
         }
 
         // GET: userroles/Edit/5
+        [Authorize(Roles = "Суперюзер")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,6 +83,7 @@ namespace TermProjectBookkeeping.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Суперюзер")]
         public ActionResult Edit([Bind(Include = "id,rolename")] userrole userrole)
         {
             if (ModelState.IsValid)
@@ -90,6 +96,7 @@ namespace TermProjectBookkeeping.Controllers
         }
 
         // GET: userroles/Delete/5
+        [Authorize(Roles = "Суперюзер")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -107,6 +114,7 @@ namespace TermProjectBookkeeping.Controllers
         // POST: userroles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Суперюзер")]
         public ActionResult DeleteConfirmed(int id)
         {
             userrole userrole = db.userrole.Find(id);

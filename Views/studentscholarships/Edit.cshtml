@@ -1,15 +1,15 @@
 ﻿@model TermProjectBookkeeping.studentscholarship
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Редактирование";
 }
 
-<h2>Edit</h2>
+<h2>Редактировать</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>studentscholarship</h4>
         <hr />
@@ -17,7 +17,7 @@
         @Html.HiddenFor(model => model.id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.student, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="control-label col-md-2"> Студент </div>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.student, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.student, "", new { @class = "text-danger" })
@@ -25,7 +25,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.grades, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="control-label col-md-2">  Тип оценок </div>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.grades, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.grades, "", new { @class = "text-danger" })
@@ -33,7 +33,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ifsocial, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="control-label col-md-2"> Социальная стипендия </div>
             <div class="col-md-10">
                 <div class="checkbox">
                     @Html.EditorFor(model => model.ifsocial)
@@ -43,7 +43,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ifsocialhelp, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="control-label col-md-2"> Материальная помощь </div>
             <div class="col-md-10">
                 <div class="checkbox">
                     @Html.EditorFor(model => model.ifsocialhelp)
@@ -53,7 +53,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.scholarshiptype, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="control-label col-md-2"> Стипендия, всего </div>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.scholarshiptype, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.scholarshiptype, "", new { @class = "text-danger" })
@@ -69,5 +69,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Вернуться к списку", "Index")
 </div>

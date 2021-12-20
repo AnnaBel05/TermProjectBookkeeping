@@ -1,17 +1,17 @@
 ﻿@model TermProjectBookkeeping.purchaselist
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Подробнее";
 }
 
-<h2>Details</h2>
+<h2>Подробная информация</h2>
 
 <div>
-    <h4>purchaselist</h4>
+    <h4>список закупок</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.purchasename)
+            Наименование
         </dt>
 
         <dd>
@@ -19,7 +19,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.purchasedescription)
+            Описание
         </dt>
 
         <dd>
@@ -27,7 +27,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.sender)
+            Кафедра-отправитель
         </dt>
 
         <dd>
@@ -35,7 +35,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.quantity)
+            Количество
         </dt>
 
         <dd>
@@ -43,7 +43,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.price1pc)
+            Цена за 1 шт, руб.
         </dt>
 
         <dd>
@@ -51,7 +51,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.overallsum)
+            Общая стоимость
         </dt>
 
         <dd>
@@ -59,7 +59,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ifapproved)
+            Одобрить
         </dt>
 
         <dd>
@@ -69,6 +69,14 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @if (User.Identity.IsAuthenticated)
+    {
+        if (User.IsInRole("Главный бухгалтер"))
+        {
+        <p>
+            <button>@Html.ActionLink("Редактировать", "Edit", new { id = Model.id })</button>
+        </p>
+        }
+    }
+<button>@Html.ActionLink("Вернуться к списку", "Index")</button>
 </p>

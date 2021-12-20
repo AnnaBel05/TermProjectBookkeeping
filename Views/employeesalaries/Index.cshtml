@@ -1,33 +1,33 @@
 ﻿@model IEnumerable<TermProjectBookkeeping.employeesalary>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "З/П сотрудников";
 }
 
-<h2>Index</h2>
+<h2>Фонд З/П</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Внести информацию о зарплате", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.employee)
+            <div> Работник </div>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.overwork)
+            <div> Часы переработки </div>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.sickdays)
+            <div> Больничный </div>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.bonus)
+            <div> Премия </div>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.overall)
+            <div> З/П </div>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.hourspermonth)
+            <div> Часов в месяц </div>
         </th>
         <th></th>
     </tr>
@@ -54,15 +54,32 @@
                 @Html.DisplayFor(modelItem => item.hourspermonth)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @Html.ActionLink("Редактировать", "Edit", new { id = item.id }) <p style="display:inline"> | </p>
+                    @Html.ActionLink("Детали", "Details", new { id = item.id }) <p style="display:inline"> | </p>
+                    @Html.ActionLink("Удалить", "Delete", new { id = item.id })
+                }
             </td>
         </tr>
     }
 
 </table>
 
-<p>
-    <button>@Html.ActionLink("Assign salary", "AssignSalary", "employeesalaries")</button>
-</p>
+
+@if (User.Identity.IsAuthenticated)
+{
+    if (User.IsInRole("Главный бухгалтер"))
+    {
+        <p>
+            <button>@Html.ActionLink("Назначить зарплату", "AssignSalary", "employeesalaries")</button>
+        </p>
+    }
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+        <button>@Html.ActionLink("Просмотреть фонд з/п", "Index", "salaryfunds")</button>
+    </p>
+}

@@ -1,30 +1,30 @@
 ﻿@model IEnumerable<TermProjectBookkeeping.studentscholarship>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Стипендия студентов";
 }
 
-<h2>Index</h2>
+<h2>Распределение стипендии</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Внести информацию о стипендиях", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.student)
+            <div> Студент </div>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.grades)
+            <div> Тип оценок </div>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ifsocial)
+            <div> Социальная стипендия </div>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ifsocialhelp)
+            <div> Материальная помощь </div>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.scholarshiptype)
+            <div> Стипендия, всего </div>
         </th>
         <th></th>
     </tr>
@@ -48,16 +48,31 @@
                 @Html.DisplayFor(modelItem => item.scholarshiptype)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @Html.ActionLink("Редактировать", "Edit", new { id = item.id }) <p style="display:inline"> | </p>
+                    @Html.ActionLink("Детали", "Details", new { id = item.id }) <p style="display:inline"> | </p>
+                    @Html.ActionLink("Удалить", "Delete", new { id = item.id })
+                }
             </td>
         </tr>
     }
 
 </table>
 
+@if (User.Identity.IsAuthenticated)
+{
+    if (User.IsInRole("Главный бухгалтер"))
+    {
+        <p>
+            <button>@Html.ActionLink("Назначить стипендии", "AssignScholarship", "studentscholarships")</button>
+        </p>
+    }
+}
 
-<p>
-    <button>@Html.ActionLink("Assign scholarships", "AssignScholarship", "studentscholarships")</button>
-</p>
+@if (User.Identity.IsAuthenticated)
+{
+        <p>
+            <button>@Html.ActionLink("Просмотреть стипендиальный фонд", "Index", "scholarshipfunds")</button>
+        </p>
+}

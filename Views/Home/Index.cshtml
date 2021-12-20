@@ -1,8 +1,14 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Бухгалтерия</h2>
 
-<p>Hello from our View Template!</p>
+@if (User.Identity.IsAuthenticated)
+{
+    <p>Добро пожаловать в сервис бухгалтерии, @User.Identity.Name! </p>
+}
+else
+{
+    <p>Добро пожаловать в сервис бухгалтерии! Для продолжения, пожалуйста, авторизуйтесь.</p>
+}

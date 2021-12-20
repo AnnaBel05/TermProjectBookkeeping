@@ -1,17 +1,17 @@
 ﻿@model TermProjectBookkeeping.purchaselist
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Создание";
 }
 
-<h2>Create</h2>
+<h2>Создать</h2>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>purchaselist</h4>
+        <h4>Список закупок</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -81,5 +81,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Вернуться к списку", "Index")
 </div>

@@ -12,25 +12,26 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.formationdate)
+            <div> Дата формирования </div>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.scholarshipsocial)
+            <div> Сумма соц. стипендии </div>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.scholarshipgreat)
+            <div> Сумма стипендии на "хор" </div>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.scholarshipgreatperfect)
+            <div> Сумма стипендии на "хор" и "отл" </div>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.scholarshipperfect)
+            <div> Сумма стипендии на "отл"  </div>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.basescholarship)
+            <div> Базовая стипендия </div>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.totalsum)
+            <div> Общая сумма </div>
+            
         </th>
         <th></th>
     </tr>
@@ -59,11 +60,13 @@
             @Html.DisplayFor(modelItem => item.totalsum)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            @if (User.Identity.IsAuthenticated)
+            {
+                @Html.ActionLink("Редактировать", "Edit", new { id = item.id }) <p style="display:inline"> | </p>
+                @Html.ActionLink("Детали", "Details", new { id = item.id }) <p style="display:inline"> | </p>
+                @Html.ActionLink("Удалить", "Delete", new { id = item.id })
+            }
         </td>
     </tr>
 }
-
 </table>

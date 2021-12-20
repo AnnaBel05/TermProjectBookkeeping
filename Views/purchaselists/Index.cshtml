@@ -1,69 +1,89 @@
 ﻿@model IEnumerable<TermProjectBookkeeping.purchaselist>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Список закупок";
 }
 
-<h2>Index</h2>
+<h2>Список закупок</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        if (User.IsInRole("Суперюзер"))
+        {
+            @Html.ActionLink("Создать новый список закупок", "Create")
+        }
+    }
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.purchasename)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.purchasedescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.sender)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.quantity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.price1pc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.overallsum)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ifapproved)
-        </th>
-        <th></th>
-    </tr>
+    <table class="table">
+        <tr>
+            <th>
+                <div> Наименование </div>
+            </th>
+            <th>
+                <div> Описание </div>
+            </th>
+            <th>
+                <div> Кафедра-отправитель </div>
+            </th>
+            <th>
+                <div> Количество </div>
+            </th>
+            <th>
+                <div> Цена за 1 шт, руб. </div>
+            </th>
+            <th>
+                <div> Общая стоимость </div>
+            </th>
+            <th>
+                <div> Одобрить </div>
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.purchasename)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.purchasedescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.sender)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.quantity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.price1pc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.overallsum)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ifapproved)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.purchasename)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.purchasedescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.price1pc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.overallsum)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ifapproved)
+                </td>
+                <td>
 
-</table>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        if (User.IsInRole("Главный бухгалтер"))
+                        {
+                            <p>
+                                <button>@Html.ActionLink("Редактировать", "Edit", new { id = item.id })</button>
+                            </p>
+                        }
+                        else if (User.IsInRole("Суперюзер"))
+                        {
+                            @Html.ActionLink("Удалить", "Delete", new { id = item.id })
+                        }
+                        @Html.ActionLink("Детали", "Details", new { id = item.id })
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>

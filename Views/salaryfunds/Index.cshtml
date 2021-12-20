@@ -1,30 +1,30 @@
 ﻿@model IEnumerable<TermProjectBookkeeping.salaryfund>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Фонд з/п";
 }
 
-<h2>Index</h2>
+<h2>З/п</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Добавить информацию о бюджете", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.worktime)
+            <div> Рабочее время </div>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.overwork)
+            <div> Сверхурочные </div>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.sickdays)
+            <div> Больничный </div>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.totalsum)
+            <div> Общая сумма </div>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.formationdate)
+            <div> Дата формирования </div>
         </th>
         <th></th>
     </tr>
@@ -47,9 +47,12 @@
             @Html.DisplayFor(modelItem => item.formationdate)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            @if (User.Identity.IsAuthenticated)
+            {
+                @Html.ActionLink("Редактировать", "Edit", new { id = item.id }) <p style="display:inline"> | </p>
+                @Html.ActionLink("Детали", "Details", new { id = item.id }) <p style="display:inline"> | </p>
+                @Html.ActionLink("Удалить", "Delete", new { id = item.id })
+            }
         </td>
     </tr>
 }

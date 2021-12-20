@@ -15,12 +15,14 @@ namespace TermProjectBookkeeping.Controllers
         private bookkeepingEntities2 db = new bookkeepingEntities2();
 
         // GET: salaryfunds
+        [Authorize]
         public ActionResult Index()
         {
             return View(db.salaryfund.ToList());
         }
 
         // GET: salaryfunds/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,6 +38,7 @@ namespace TermProjectBookkeeping.Controllers
         }
 
         // GET: salaryfunds/Create
+        [Authorize (Roles = "Главный бухгалтер, Суперюзер")]
         public ActionResult Create()
         {
             return View();
@@ -46,6 +49,7 @@ namespace TermProjectBookkeeping.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "id,worktime,overwork,sickdays,totalsum,formationdate")] salaryfund salaryfund)
         {
             if (ModelState.IsValid)
@@ -59,6 +63,7 @@ namespace TermProjectBookkeeping.Controllers
         }
 
         // GET: salaryfunds/Edit/5
+        [Authorize(Roles = "Главный бухгалтер, Суперюзер")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,6 +83,7 @@ namespace TermProjectBookkeeping.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Главный бухгалтер, Суперюзер")]
         public ActionResult Edit([Bind(Include = "id,worktime,overwork,sickdays,totalsum,formationdate")] salaryfund salaryfund)
         {
             if (ModelState.IsValid)
@@ -90,6 +96,7 @@ namespace TermProjectBookkeeping.Controllers
         }
 
         // GET: salaryfunds/Delete/5
+        [Authorize(Roles = "Главный бухгалтер, Суперюзер")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -107,6 +114,7 @@ namespace TermProjectBookkeeping.Controllers
         // POST: salaryfunds/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Главный бухгалтер, Суперюзер")]
         public ActionResult DeleteConfirmed(int id)
         {
             salaryfund salaryfund = db.salaryfund.Find(id);
