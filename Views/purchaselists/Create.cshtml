@@ -15,7 +15,7 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.purchasename, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="control-label col-md-2"> Наименование </div>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.purchasename, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.purchasename, "", new { @class = "text-danger" })
@@ -23,7 +23,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.purchasedescription, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="control-label col-md-2"> Описание </div>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.purchasedescription, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.purchasedescription, "", new { @class = "text-danger" })
@@ -31,7 +31,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.sender, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="control-label col-md-2"> Кафедра-отправитель </div>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.sender, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.sender, "", new { @class = "text-danger" })
@@ -39,7 +39,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="control-label col-md-2"> Количество </div>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.quantity, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.quantity, "", new { @class = "text-danger" })
@@ -47,7 +47,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.price1pc, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="control-label col-md-2"> Цена за 1 шт, руб </div>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.price1pc, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.price1pc, "", new { @class = "text-danger" })
@@ -55,7 +55,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.overallsum, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="control-label col-md-2"> Общая стоимость </div>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.overallsum, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.overallsum, "", new { @class = "text-danger" })
@@ -63,7 +63,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ifapproved, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="control-label col-md-2"> Одобрить </div>
             <div class="col-md-10">
                 <div class="checkbox">
                     @Html.EditorFor(model => model.ifapproved)
