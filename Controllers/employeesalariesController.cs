@@ -132,7 +132,7 @@ namespace TermProjectBookkeeping.Controllers
             base.Dispose(disposing);
         }
 
-        [Authorize (Roles = "Главный бухгалтер. Суперюзер")]
+        [Authorize (Roles = "Главный бухгалтер, Суперюзер")]
         public ActionResult AssignSalary()
         {
             using (db)
